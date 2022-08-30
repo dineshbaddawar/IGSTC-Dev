@@ -1,0 +1,48 @@
+.navbar-nav li a {
+    font-size: 14px;
+}
+
+.banner h1, .become-mentor h1, .about-us h1, .recruiter h1 {
+    font-size: 45px;
+}
+.heading-border, .heading-border-center {
+    font-size: 40px;
+}
+
+.banner p, .about-us p {
+    font-size: 17px;
+    padding: 16px 50px 16px 0;
+}
+
+.options {
+    font-size: 15px;
+}
+
+.our-mentor, .our-academic {
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+}
+
+
+/* ------------------------- Become a Mentor ------------------------- */
+.become-mentor p {
+    font-size: 22px;
+}
+
+.about-mentor p {
+    font-size: 18px;
+}
+
+/* ------------------------- Meet Mentor ------------------------- */
+.about-us {
+    padding: 70px 0 100px 0;
+}
+
+    .about-us p {
+        padding-right: 0;
+    }
+
+    .about-us .caption {
+        bottom: -40px;
+    }
+
+/* ------------------------- Why Hire ------------------------- */

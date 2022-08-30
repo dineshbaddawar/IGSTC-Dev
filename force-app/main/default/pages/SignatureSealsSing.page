@@ -1,0 +1,66 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false" controller="IndustrialFellowshipController">
+    <html>
+    <div ng-controller="SignatureSealsSing_Ctrl">
+
+        <head>
+            <apex:stylesheet value="{!$Resource.ApplicantPortalCSS}" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.16/textAngular.css" crossorigin="anonymous"
+            />
+            <script>
+                var userId = '{!$CurrentPage.parameters.id}';
+            </script>
+            <style>
+                .ta-editor {
+                    min-height: 150px;
+                    height: auto;
+                    overflow: auto;
+                }
+            </style>
+        </head>
+
+        <body>
+            <div class="container px-4">
+                <div class="card h-100 m-5">
+                    <div class="card-header">
+                        <h2 class="p-3">
+                            <b>Signature and Seals</b>
+                        </h2>
+                    </div>
+                    <div class="card-text m-3">
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <label>Consent from the parent organisation (max 500 KB)</label>
+                                <input type="file" class="form-control"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Supporting documents in favour of your application (max 10 MB)</label>
+                                <input type="file" class="form-control"/>
+                            </div>
+                        </div>
+                    
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <label>Signature (date) of the applicant Upload in jpg/jpeg <br/>format with size between 30-50 kb</label>
+                                <input type="file" class="form-control"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Signature of the Head of Organization (signature, date and seal) <br/>Upload in jpg/jpeg format with size between 50-70k</label>
+                                <input type="file" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <button class="blue-btn float-end" type="button">
+                                    <i class="fa-solid fa-check me-2"></i>Submit</button>
+                                <button class="blue-bordered-btn float-end me-2" ng-click="previousProjectDetSingh()" type="button">
+                                    <i class="fa-solid fa-arrow-left me-2"></i>Previous</button>
+                            </div>
+                        </div>            
+                    </div>
+                </div>
+            </div>
+        </body>
+    </div>
+
+    </html>
+</apex:page>

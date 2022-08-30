@@ -1,0 +1,67 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false">
+  <apex:stylesheet value="{!$Resource.ApplicantPortalCSS}"/>
+  <apex:stylesheet value="{!$Resource.SlickThemeCSS}"/>
+  <apex:stylesheet value="{!$Resource.SlickCss}"/>
+  <div ng-controller='home_ctrl'>
+    <!-- <div class="row" style="margin-right:0px !important;margin-left:0px !important;--bs-gutter-x: 0rem!important">
+        <div class="col-md-12">
+          <apex:image url="{!$Resource.Hero_IGSTC}" styleClass="logo" width="100%" height="100%" />
+          <div class="row" style="margin-right:0px !important;margin-left:0px !important;--bs-gutter-x: 0rem!important">
+            <div class="col-md-3 carousel-caption text-black text-sm-top">
+              <h1><b>It's time to bring your ideas alive</b></h1>
+              <h6>IGSTC intends to catalyse innovative centric R and D
+                projects by synergising the strength of research
+                institution and industry from India and Germany.
+              </h6>
+              <a href="#Campaign" class="btn btn-dark">Let's Start</a>
+            </div>
+            <div class="col-md-9"> </div>
+          </div>
+        </div>
+    </div>  -->
+    <div class="banner pb-5 pb-md-0">
+      <div class="container">
+      <div class="row justify-content-between align-items-center">
+          <div class="col-12 col-md-6 col-lg-5 col-xl-6">
+              <h1>It's Time to Bring Your <br/><span>Ideas </span>Alive</h1>
+              <p>
+                IGSTC intends to catalyse innovative centric R and D projects by synergising the strength of research institution and industry from India and Germany.
+              </p>
+              <a href="#Campaign" class="blue-btn me-md-3">Let's Start</a>
+          </div>
+          <div class="col-12 col-md-6 col-lg-7 col-xl-6 position-relative d-none d-md-inline-block">
+              <apex:image url="{!$Resource.Hero_IGSTC}" styleClass="img-fluid"/>
+          </div>
+      </div>
+    </div>
+</div>
+<div class="banner-2 pb-5 pb-md-0">
+  <div class="container">
+    <div class="row justify-content-between align-items-center">
+        <div class="col-12 col-md-7 col-lg-6 col-xl-6">
+          <button type="button" class="btn btn-info">WHAT WE DO</button>
+      <!-- <h3><b>ABOUT IGSTC</b></h3> -->
+      <h2>ABOUT IGSTC</h2>
+      <p>The Indo-German Science and Technology Centre (IGSTC), a joint initiative by the Department of Science  and  Technology (DST), Government of India and the Federal Ministry of Education and Research (BMBF), Government of Germany was established to facilitate Indo-German R and D networking through substantive interactions among government, academia/research system and industries, thus fostering innovation for overall economic and societal developments in both the countries. Through its various funding program, IGSTC intends to catalyse innovation centric RD projects by synergising the strength of research/academic institutions and public/private industries from India and Germany.</p>
+        <h5><b style="color: #eb8224">OBJECTIVES OF IGSTC :-</b></h5>
+      <ul class="u_list">
+        <li>Playing a proactive role in facilitating participation of industry in joint R and D projects</li>  
+        <li>Providing/assisting in mobilising resources to carry out industrial R and D projects
+        </li> 
+        <li>Promoting electronic exchange and dissemination of information on opportunities in bilateral science and technology cooperation. The Centre will also prepare/compile state-of-the-art reports on topics of interest with the help of highly qualified scientists and technologists, one from each country</li> 
+        <li>Providing individual advice to institutes and industries from both the countries on the possibilities of Indo-German cooperation and helping in the identification of suitable partners</li> 
+
+        <li>Facilitating and promoting Indo-German bilateral collaborations in basic and applied science, research and technology through substantive interactions among government, academia and industry</li> 
+        <li>Encouraging public-private partnerships (PPP) to foster elements of research, development and innovation, and cultivating a culture of cooperation between science and industry</li> 
+        <li>Nurturing contacts between young and mid-career scientists and technologists to develop a sense of mutual trust, partnership, leadership and entrepreneurship</li> 
+        <li>Developing cooperation through the identification of scientists and scientific institutions of both the countries</li> 
+      </ul>
+      </div>
+      <div class="col-12 col-md-5 col-lg-6 col-xl-6">
+        <apex:image url="{!$Resource.About}" styleClass="img-fluid" />
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+</apex:page>

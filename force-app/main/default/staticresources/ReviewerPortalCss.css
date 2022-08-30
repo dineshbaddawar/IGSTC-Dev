@@ -1,0 +1,79 @@
+.btn-success {
+    color: #fff;
+    background-color: #22b34e;
+    border-color: #22b34e;
+}
+ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.top-nav {
+    background: #ff7b1f;
+    color: #fff;
+    padding: 7px 0;
+}
+.top-nav .link {
+    color: #fff;
+}
+.top-nav .social li {
+    padding: 0 0 0 10px;
+    display: inline-block;
+}
+.top-nav .social li a {
+    color: #fff;
+    font-size: 20px;
+}
+.navbar .navbar-nav .nav-item {
+    line-height: 31px;
+    padding: 0 0 0 42px;
+}
+.navbar .navbar-nav .nav-item:last-child {
+    padding-left: 15px;
+}
+.navbar .navbar-nav .nav-link {
+    color: #080808;
+    padding: 0;
+}
+.navbar .navbar-nav .nav-link span {
+    font-weight: 700;
+}
+.carousel-banner {
+    /* background: url({!$Resource.Hero_IGSTC}) no-repeat; */
+    background-size: cover;
+    min-height: calc(100vh - 124px);
+    align-items: center;
+    display: flex;
+}
+.carousel-banner h1 {
+    color: #030303;
+    font-size: 40px;
+    font-weight: 800;
+}
+.carousel-banner h2 {
+    background: #f0222e;
+    color: #fff;
+    font-size: 50px;
+    font-weight: 800;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+    padding: 10px;
+    display: inline-block;
+}
+.carousel-banner p {
+    padding: 30px 90px 15px 0;
+}
+.service {
+    padding: 50px 0 0 0;
+}
+.service h4 {
+    color: #ff7b1f;
+    font-size: 17px;
+    font-weight: 700;
+}
+.service p {
+    font-size: 14px;
+    line-height: 24px;
+    padding: 10px 0 0 0;
+}

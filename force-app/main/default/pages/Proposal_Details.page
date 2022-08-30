@@ -1,0 +1,49 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false">
+    <html>
+        <div ng-controller="proposal_ctrl">
+            <head>
+                <script>
+                    var userId = '{!$CurrentPage.parameters.id}';
+                    </script>
+                <style>
+                    .ta-editor {
+                        min-height: 300px;
+                        height: auto;
+                        overflow: auto;
+                        font-family: inherit;
+                        font-size: 100%;
+                    }
+                </style>
+                <apex:stylesheet value="{!$Resource.ApplicantPortalCSS}" />
+            </head>
+
+            <body>
+                <div class="container px-4">
+                    <div class="card h-100 m-5">
+                        <div class="card-header">
+                            <h2 class="p-3">
+                                <b>Proposal Details</b>
+                            </h2>
+                        </div>
+                        <div class="row p-5">
+                            <div class="col-md-12 mb-5">
+                                    <h4><b>Background, concept and purpose in detail</b></h4><br/>
+                                <div text-angular="text-angular" name="htmlcontent" ng-model="proposalDetails.Background_Concept_Purpose__c" ta-disabled='true'
+                                    ng-readonly="true"></div>
+                            </div>
+                            <div class="col-md-12 mb-5">
+                                    <h4><b>Specific need for the bilateral event, its relevance and mutual benefits</b></h4><br/>
+                                <div text-angular="text-angular" name="htmlcontent" ng-model="proposalDetails.Specific_Need_For_the_Bilateral_Event__c" ta-disabled='disabled'
+                                    ng-disabled="disable"></div>
+                            </div>
+                        </div>
+                        <div class="card-footer">                            
+                                <button type="button" class="blue-btn float-end me-4" ng-click="saveProposalDetails()">Submit and Next<i class="fa-solid fa-arrow-right ms-3"></i></button>
+                                <button type="button" class="blue-bordered-btn float-end me-4" ng-click="redirectPageURL('Coordinators_Page')"><i class="fa-solid fa-arrow-left i-padding"></i>Previous</button>
+                        </div>
+                    </div>
+                </div>
+            </body>
+        </div>
+    </html>
+</apex:page>

@@ -1,0 +1,313 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false" controller="IndustrialFellowshipController">
+    <html>
+    <div ng-controller="FellowshipDetailsIF_Ctrl">
+
+        <head>
+            <apex:stylesheet value="{!$Resource.ApplicantPortalCSS}" />
+            <script>
+                var userId = '{!$CurrentPage.parameters.id}';
+            </script>
+            <style>
+                .ta-editor {
+                    min-height: 150px;
+                    height: auto;
+                    overflow: auto;
+                    
+                    
+                        }
+            </style>
+        </head>
+
+        <body>
+            <div class="container px-4">
+                <div class="card h-100 m-5">
+                    <div class="card-header">
+                        <h2 class="p-3">
+                            <b>Industrial Fellowship</b>
+                        </h2>
+                    </div>
+                    <div class="card-text m-3">
+                        <div id="fellowshipDetails">
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <h4 class="heading-border-2">Fellowship Details</h4>
+                                </div>
+                            </div>
+                            <div id="fellowshipDet">
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <label>Proposed area of work</label>
+                                    <input type="text" ng-model="objProposal.Proposed_area__c" class="form-control" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Title of the proposed work/project</label>
+                                    <input type="text" ng-model="objProposal.Title_Of__c" class="form-control" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Host industry/organisation details</label>
+                                    <input type="text" ng-model="objProposal.Host_industry__c" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <label>Parent organisation details</label>
+                                    <input type="text" ng-model="objProposal.Parent_organisation__c" class="form-control" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Duration of the fellowship (in months)</label>
+                                    <input type="text" class="form-control" />
+                                </div>
+                                
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <label>Brief Statement of Purpose (Max 400 characters)</label>
+                                    <!-- <textarea class="form-control" ng-model="objProposal.Brief_Statement_of_Purpose__c" cols="10" rows="3" maxlength="400"></textarea> -->
+                                    <text-angular name="textBox" ng-model="objProposal.Brief_Statement_of_Purpose__c"></text-angular>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Objectives of the work (Max 500 characters)</label>
+                                    <!-- <textarea class="form-control" cols="10" ng-model="objProposal.Research_Approach_Objectives__c" rows="3" maxlength="500"></textarea> -->
+                                    <text-angular name="textBox" ng-model="objProposal.Research_Approach_Objectives__c"></text-angular>
+                                </div>
+                               
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <label>Work plan (Max 2000 characters)</label>
+                                    <!-- <textarea class="form-control" cols="10" ng-model="objProposal.Work_plan__c" rows="3" maxlength="2000"></textarea> -->
+                                    <text-angular name="textBox" ng-model="objProposal.Work_plan__c"></text-angular>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Expected outcomes (Max 400 characters)</label>
+                                    <!-- <textarea class="form-control" ng-model="objProposal.Expected_Deliverables__c" cols="10" rows="3" maxlength="500"></textarea> -->
+                                    <text-angular name="textBox" ng-model="objProposal.Expected_Deliverables__c"></text-angular>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <label>Attach any referred Image / Diagram / Chart /
+                                        <br/>Graph / Illustration (Max 1) for Work plan</label>
+                                    <input type="file" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                            <!-- start mentor detail -->
+                            <div id="mentorDet">
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <h4 class="heading-border-2">Mentor Address</h4>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
+                                        <h4 class="heading-border-1">Contact Address</h4>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="checkbox" id="chkPerAdd" ng-model="objContacts__r.Addess_same_as__c" ng-click="setAddressSameAs()" style="height:20px;width:20px;"
+                                        />
+                                        <label>Permanent address same as contact address</label>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
+                                        <label>First Name</label>
+                                        <input type="text" ng-model="objContacts__r.FirstName" class="form-control" placeholder="first name" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Last Name</label>
+                                        <input type="text" ng-model="objContacts__r.LastName" class="form-control" placeholder="last name" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Line 1</label>
+                                        <input type="text" ng-model="objContacts__r.MailingStreet" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
+                                        <label>Line 2</label>
+                                        <input type="text" ng-model="MailingLine2" class="form-control" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>District</label>
+                                        <input type="text" ng-model="objContacts__r.MailingCity" class="form-control" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>State</label>
+                                        <input type="text" ng-model="objContacts__r.MailingState" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
+                                        <label>Country</label>
+                                        <select type="select" ng-model="objContacts__r.MailingCountry" class="form-control">
+                                            <option ng-selected="{{item==objContacts__r.MailingCountry}}" ng-repeat="item in country" value="{{item}}">{{item}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Pin Code</label>
+                                        <input class="form-control" ng-model="objContacts__r.MailingPostalCode" type="text" />
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <h4 class="heading-border-1">Permanent Address</h4>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Line 1</label>
+                                        <input type="text" ng-model="objContacts__r.OtherStreet" class="form-control" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Line 2</label>
+                                        <input type="text" ng-model="OtherLine22" class="form-control" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>District</label>
+                                        <input type="text" ng-model="objContacts__r.OtherCity" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
+                                        <label>State</label>
+                                        <input type="text" ng-model="objContacts__r.OtherState" class="form-control" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Country</label>
+                                        <select type="select" ng-model="objContacts__r.OtherCountry" class="form-control">
+                                            <option ng-selected="{{item==objContacts__r.OtherCountry}}" ng-repeat="item in country" value="{{item}}">{{item}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Pin Code</label>
+                                        <input type="text" ng-model="objContacts__r.OtherPostalCode" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
+                                        <label>Designation/Position of the Mentor</label>
+                                        <input type="text" ng-model="objContacts__r.Position_of_the_Mentor__c" class="form-control" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Brief portfolio (Max 250 characters)</label>
+                                        <input ng-model="objContacts__r.Brief_portfolio__c" type="text" maxlength="250" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- strat host details -->
+                            <div id="hostDet">
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <h4 class="heading-border-2">Host Address</h4>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
+                                        <h4 class="heading-border-1">Contact Address</h4>
+                                    </div>
+                                <div class="col-md-8">
+                                    <input type="checkbox" id="chkPerAdd2" ng-model="objContact1.Addess_same_as__c" ng-click="setAddressSameAsHost()" style="height:20px;width:20px;"/>
+                                    <label>Permanent address same as contact address</label>
+                                </div>
+                            
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
+                                        <label>First Name</label>
+                                        <input type="text" ng-model="objContact1.FirstName" class="form-control" placeholder="first name" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Last Name</label>
+                                        <input type="text" ng-model="objContact1.LastName" class="form-control" placeholder="last name" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Line 1</label>
+                                        <input type="text" ng-model="objContact1.MailingStreet" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
+                                        <label>Line 2</label>
+                                        <input type="text" ng-model="MailingStreet3" class="form-control" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>District</label>
+                                        <input type="text" ng-model="objContact1.MailingCity" class="form-control" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>State</label>
+                                        <input type="text" ng-model="objContact1.MailingState" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
+                                        <label>Country</label>
+                                        <select type="select" ng-model="objContact1.MailingCountry" class="form-control">
+                                            <option ng-selected="{{item==objContact1.MailingCountry}}" ng-repeat="item in country" value="{{item}}">{{item}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Pin Code</label>
+                                        <input class="form-control" ng-model="objContact1.MailingPostalCode" type="text" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Designation/Position of the Mentor</label>
+                                        <input type="text" ng-model="objContact1.Position_of_the_Mentor__c" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12">
+                                        <h4 class="heading-border-1">Permanent Address</h4>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Line 1</label>
+                                        <input type="text" ng-model="objContact1.OtherStreet" class="form-control" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Line 2</label>
+                                        <input type="text" ng-model="OtherLine223" class="form-control" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>District</label>
+                                        <input type="text" ng-model="objContact1.OtherCity" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
+                                        <label>State</label>
+                                        <input type="text" ng-model="objContact1.OtherState" class="form-control" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Country</label>
+                                        <select type="select" ng-model="objContact1.OtherCountry" class="form-control">
+                                            <option ng-selected="{{item==objContact1.OtherCountry}}" ng-repeat="item in country" value="{{item}}">{{item}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Pin Code</label>
+                                        <input type="text" ng-model="objContact1.OtherPostalCode" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
+                                        <label>Brief portfolio (Max 250 characters)</label>
+                                        <input ng-model="objContact1.Brief_portfolio__c" type="text" maxlength="250" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12 mt-5">
+                                    <button class="blue-btn float-end" ng-click="clickFellowshipDetails()" type="button">
+                                        <i class="fa-solid fa-check me-2"></i>Submit</button>
+                                    <button class="blue-bordered-btn float-end me-2" ng-click="clickPreviousFellowshipDetails()" type="button">
+                                        <i class="fa-solid fa-arrow-left me-2"></i>Previous</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </div>
+
+    </html>
+</apex:page>

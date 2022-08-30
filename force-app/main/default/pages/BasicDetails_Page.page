@@ -1,0 +1,91 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false">
+    <html>
+        <div ng-controller="basicDetails_ctrl">
+            <head>
+                <style>
+                    .ta-editor {
+                        min-height: 300px;
+                        height: auto;
+                        overflow: auto;
+                        font-family: inherit;
+                        font-size: 100%;
+                    }
+                </style>
+                <apex:stylesheet value="{!$Resource.ApplicantPortalCSS}" />
+            </head>
+
+            <body>
+
+                <div class="container px-4">
+                    <div class="card h-100 m-5">
+                        <div class="card-header">
+                            <h2 class="p-3">
+                                    <b>Basic Details</b>
+                            </h2>
+                        </div>
+                        <div class="row p-5">
+                            <div class="col-md-6 mb-4">
+                                <label class="control-label">
+                                    <b>Thematic Area of the Proposal</b>
+                                </label>
+                                <input name="Thematic Area" placeholder="Thematic Area" class="form-control" type="text" ng-model="applicantDetails.Thematic_Area__c" maxlength="255" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">
+                                    <b>Title Of Proposal</b>
+                                </label>
+                                <input name="Title Of Proposal" placeholder="Title Of Proposal" class="form-control" type="text" ng-model="applicantDetails.Title_Of__c"
+                                    maxlength="255" />
+                            </div>
+                            <div class="col-md-6 mb-5">
+                                <label class="control-label">
+                                    <b>Title des Antrages(In German)</b>
+                                </label>
+                                <input name="Title In German" placeholder="Title In German" class="form-control" type="text" ng-model="applicantDetails.Title_In_German__c"
+                                    maxlength="255" />
+                            </div>
+                            <div class="col-md-6 mb-5">
+                                <label class="control-label">
+                                    <b>Acronym</b>
+                                </label>
+                                <input name="acronym" placeholder="acronym" class="form-control" type="text" ng-model="applicantDetails.Acronym__c"
+                                    maxlength="32768" />
+                            </div>
+                            <div class="col-md-6 mb-5">
+                                <label class="control-label">
+                                    <b>Proposed Venue</b>
+                                </label>
+                                <input name="proposedvenue" placeholder="proposedvenue" class="form-control" type="text" ng-model="applicantDetails.Proposed_Venue__c"
+                                    maxlength="255" />
+                            </div>
+                            <div class="col-md-6 mb-5">
+                                <label class="control-label">
+                                    <b>Proposed Date</b>
+                                </label>
+                                <span class="required-asterisk" style="color:red;">*</span>
+                                <input name="Proposed Date" placeholder="Proposed Date" class="form-control" ng-init="proposedDate=(proposedDate | date:'yyyy-MM-dd')"
+                                    type="date" ng-model="proposedDate" required="true" ng-required="applicantDetails.Proposed_Date__c" />
+                            </div>
+                            <div>
+                                <div class="col-md-12">
+                                    <label class="control-label">
+                                        <b>Summary</b>
+                                    </label>
+                                    <div text-angular="text-angular" name="htmlcontent" ng-model="applicantDetails.Summary__c" ta-disabled='true' maxlength="1000"></div>
+                                </div>
+                            </div>                       
+                            <!--div class="col-md-7" style="margin-top: 3%; margin-bottom: 10%;">
+                                    <button class="btn btn-dark" type="submit" ng-click="saveApplication()" style="padding-left: 15%; padding-right: 15%;">Submit And Next</button>
+                                </div-->
+                        </div>
+                        <div class="card-footer">
+                            <!-- <div class="col-12"> -->
+                                <button type="button" class="blue-btn float-end me-4" ng-click="saveBasicDetails()"><i class="fa-solid fa-check i-padding"></i>Submit and Next</button>
+                        <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+            </body>
+        </div>
+    </html>
+</apex:page>

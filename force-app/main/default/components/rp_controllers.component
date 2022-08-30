@@ -1,0 +1,8 @@
+<apex:component >
+    <script> 
+        angular.module('rp_app', ['ngRoute','angularjs-dropdown-multiselect', 'ui.bootstrap', 'ui.bootstrap.datetimepicker']); 
+    </script>
+    <script src="{!$Resource.Rp_Projects}"/>
+    <script src="{!$Resource.ReviewerPortal}"/>
+    <script src="{!$Resource.ReviewerPortalCss}"/>
+    </apex:component>

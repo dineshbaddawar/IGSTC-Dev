@@ -1,0 +1,88 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false"  docType="html-5.0" controller="ReviewerPortal_Controller">
+<head>
+    <c:Libraries /> 
+    <script src="{!$Resource.AngularMultiSelectDirective}" />
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.7.0/lodash.min.js">
+    </script>
+    <script src="{!$Resource.datetimepicker}">
+    </script>
+    <script> 
+    debugger;
+    var tabValues = JSON.parse('{!tabValues}');
+    var reviewerId = '{!$CurrentPage.parameters.id}';
+    var GradValues = JSON.parse('{!GradValues}');
+    var RatingValues = JSON.parse('{!RatingValues}');
+    var stages = JSON.parse('{!stages}');
+
+    </script>
+    <c:rp_controllers />
+</head>
+<body ng-app="rp_app" ng-controller="rp_dashboard_ctrl">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:white !important;font-size: 14px;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#/CP_HomePage">  
+                <apex:image url="{!$Resource.Logo}" styleClass="logo" width="50%" height="40%" />
+            </a>
+            <button class="navbar-toggler float-end m-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <!-- <span class="navbar-toggler-icon"></span> -->
+                <i class="fa fa-bars" />
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#/ReviewerHome" ng-class="{activeColor:activeTab==0}" style="color: currentcolor;font-weight:bold;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#/Rp_Projects" ng-class="{activeColor:activeTab==1}" style="color: currentcolor;font-weight:bold;">Project's</a>
+                    </li>	 
+                </ul>
+                <!--div class="navbar-nav ms-auto me-5">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                            style="color: white !important;">
+                            <div class="profile-header-img">
+                                <img ng-show="profilePicId == undefined" class=" rounded-circle mr-2 img-circle" src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
+                                    width="40" height="40" alt="avatar" />
+                                <img ng-hide="profilePicId == undefined" class="rounded-circle mr-2 profile-pic" src="https://ondonte--dev--c.documentforce.com/sfc/servlet.shepherd/version/download/{{profilePicId}}"
+                                    width="40" height="40" alt="avatar" />
+                            </div>
+                            <span class="rank-label-container">
+                                <span class="label label-default rank-label">{{userDetails.LastName}}</span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu me-5 mobile-drops" aria-labelledby="navbarDropdown" style="margin-left: -100px">
+                            <li>
+                                <a class="dropdown-item" href="#/CP_EditProfile">Edit Profile</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#referralModal">Referrals</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" ng-click="redirectToSchdlPlnr()">My Calender</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <li>
+                                <a class="dropdown-item" ng-click="logoutContact()">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                </div-->
+
+                
+            </div>
+        </div>
+    </nav>
+    <div style="Margin-top: 1%;">
+        <div>
+
+            <ng-view>
+            </ng-view>
+        </div>
+    </div>
+</body>
+</apex:page>

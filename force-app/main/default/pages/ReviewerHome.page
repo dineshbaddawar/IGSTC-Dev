@@ -1,0 +1,115 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false">
+    <html>
+    <div ng-controller='ReviewerHome_Ctrl'>
+
+        <head>
+            <c:Libraries ></c:Libraries>
+            <apex:stylesheet value="{!$Resource.ApplicantPortalCSS}" />
+            <apex:stylesheet value="{!$Resource.ReviewerPortalCss}" />
+        </head>
+    </div>
+
+    <body>
+        <!-- <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="images/logo.png" alt="IGSTC">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Campaign</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Campaign Theme</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">MyProposal</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span>Login</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-success btn-sm" href="#">
+                                Sign Up
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav> -->
+        <div class="carousel-banner" style="background: url({!$Resource.banner_img}) no-repeat;background-size: cover;min-height: calc(100vh - 124px);align-items: center;display: flex;margin-top:-15px;">
+            <!-- <apex:image url="{!$Resource.Hero_IGSTC}" styleClass="img-fluid" /> -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-5">
+                        <h1>It's Time to Bring Your</h1>
+                        <h2>Ideas Alive</h2>
+                        <p>IGSTC intends to catalyse innovative centric R and D projects by synergising the strength of research
+                            institution and industry from India and Germany.</p>
+                        <a class="btn btn-success btn-sm" href="#">
+                            Let's Start
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="service">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4 mb-4">
+                        <h4>
+                            <apex:image url="{!$Resource.proative}" styleClass="me-2" /> Proactive Play
+                        </h4>
+                        <p>Playing a proactive role in facilitating participation of industry in joint R and D projects</p>
+                    </div>
+                    <div class="col-4 mb-4">
+                        <h4>
+                            <apex:image url="{!$Resource.moblising}" styleClass="me-2" /> Moblising Assistance
+                        </h4>
+                        <p>Providing/assisting in mobilising resources to carry out industrial R and D projects</p>
+                    </div>
+                    <div class="col-4 mb-4">
+                        <h4>
+                            <apex:image url="{!$Resource.individual}" styleClass="me-2" /> Individual Advice
+                        </h4>
+                        <p>Providing individual advice to institutes and industries from both the countries on the possibilities
+                            of Indo-German cooperation and helping in the identification of suitable partners</p>
+                    </div>
+                    <div class="col-4 mb-4">
+                        <h4>
+                            <apex:image url="{!$Resource.encouraging}" styleClass="me-2" /> Encouraging Partners
+                        </h4>
+                        <p>Encouraging public-private partnerships (PPP) to foster elements of research, development and innovation,
+                            and cultivating a culture of cooperation between science and industry</p>
+                    </div>
+                    <div class="col-4 mb-4">
+                        <h4>
+                            <apex:image url="{!$Resource.nurturing}" styleClass="me-2" /> Nurturing Contacts
+                        </h4>
+                        <p>Nurturing contacts between young and mid-career scientists and technologists to develop a sense of
+                            mutual trust, partnership, leadership and entrepreneurship</p>
+                    </div>
+                    <div class="col-4 mb-4">
+                        <h4>
+                            <apex:image url="{!$Resource.cooperative}" styleClass="me-2" /> Cooperative Development
+                        </h4>
+                        <p>Developing cooperation through the identification of scientists and scientific institutions of both
+                            the countries</p>
+                    </div>
+                    <div class="col-12 mb-4 text-end">
+                        <a href="#" class="btn btn-success btn-sm">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    </html>
+</apex:page>

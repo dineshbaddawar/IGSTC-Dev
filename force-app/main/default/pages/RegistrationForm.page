@@ -1,0 +1,624 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false" controller="RegistrationForm_Controller">
+    <html>
+
+    <head>
+        <c:Libraries ></c:Libraries>
+        <apex:stylesheet value="{!$Resource.ApplicantPortalCSS}" />
+        <apex:stylesheet value="{!$Resource.SlickThemeCSS}" />
+        <apex:stylesheet value="{!$Resource.SlickCss}" />
+        <apex:stylesheet value="{!$Resource.SmallCss}" />
+        <apex:stylesheet value="{!$Resource.MediumCss}" />
+        <apex:stylesheet value="{!$Resource.LargCss}" />
+        <style>
+            body {
+                background: #F5F5F5;
+            }
+
+            .card-img-left {
+                width: 45%;
+                /* Link to your background image using in the property below! */
+                background: scroll center url('https://source.unsplash.com/WEQbe2jBg40/414x512');
+                background-size: cover;
+            }
+
+            .btn-login {
+                font-size: 0.9rem;
+                letter-spacing: 0.05rem;
+                padding: 0.75rem 1rem;
+            }
+
+            .btn-google {
+                color: white !important;
+                background-color: #ea4335;
+            }
+
+            .btn-facebook {
+                color: white !important;
+                background-color: #3b5998;
+            }
+
+            .loadingBackground {
+                position: fixed;
+                height: 100%;
+                width: 100%;
+                background: #F6F6F6;
+                z-index: 11111;
+                opacity: 0.7;
+                top: 0px;
+                left: 0;
+                bottom: 0;
+                right: 0;
+            }
+
+            .loading {
+                top: 50%;
+                left: 50%;
+                margin: -50px 0px 0px -50px;
+                z-index: 111111;
+                position: fixed;
+            }
+
+            @media only screen and (min-width:850px) and (max-width:1000px) {
+                .padding_1000 {
+                    padding-left: 20px !important;
+                    padding-right: 20px !important;
+                }
+            }
+
+            @media only screen and (max-width: 750px) {
+                @media screen and (min-device-width: 650px) and (max-device-width: 750px) {
+                    .col {
+                        padding:unset;
+                    }
+                }
+                .col {
+                    flex-shrink: 0 !important;
+                    flex: unset;
+
+                }
+            }
+        </style>
+
+        <script>
+            var isRegistration = '{!$CurrentPage.parameters.register}';
+            var gemail = '{!$CurrentPage.parameters.gemail}';
+            var first_name = '{!$CurrentPage.parameters.first_name}';
+            var siteUrl = "{!$Label.ApplicantPortalSiteURL}";
+            function myFunction() {
+                debugger;
+                var fb = document.getElementById('facebookUrlId');
+                fb.href = "https://www.facebook.com/v2.8/dialog/oauth?client_id=" + "{!$Setup.Facebook_API_Details__c.App_Id__c}" + "&response_type=code&redirect_uri=" + "{!$Setup.Facebook_API_Details__c.login_Site_URL__c}" + "&scope=public_profile,email&&auth_type=rerequest";
+
+            }
+            function myFunctionforgoogle() {
+                debugger;
+
+                var a = document.getElementById('googleUrlId');
+                a.href = "https://accounts.google.com/AccountChooser?continue=https://accounts.google.com/o/oauth2/auth?redirect_uri=" + "{!$Setup.Google_API_Details__c.Login_Redirect_URI__c}" + "%26prompt%3Dconsent%26response_type%3Dcode%26client_id=" + "{!$Setup.Google_API_Details__c.Client_Id__c}" + "%26scope%3Dhttps://www.googleapis.com/auth/userinfo.email%2Bhttps://www.googleapis.com/auth/userinfo.email%2Bhttps://www.googleapis.com/auth/userinfo.email%2Bhttps://www.googleapis.com/auth/plus.login%2Bhttps://www.googleapis.com/auth/plus.me%2Bhttps://www.googleapis.com/auth/userinfo.email%2Bhttps://www.googleapis.com/auth/userinfo.profile%2Bhttps://www.googleapis.com/auth/plus.login%2Bhttps://www.googleapis.com/auth/userinfo.email%2Bhttps://www.googleapis.com/auth/userinfo.profile%2Bhttps://www.googleapis.com/auth/plus.login%2Bhttps://www.googleapis.com/auth/plus.login%2Bhttps://www.googleapis.com/auth/plus.login%2Bhttps://www.googleapis.com/auth/plus.me%2Bhttps://www.googleapis.com/auth/userinfo.email%2Bhttps://www.googleapis.com/auth/userinfo.profile%2Bhttps://www.googleapis.com/auth/plus.login%2Bhttps://www.googleapis.com/auth/plus.me%2Bhttps://www.googleapis.com/auth/userinfo.email%2Bhttps://www.googleapis.com/auth/userinfo.profile%2Bhttps://www.googleapis.com/auth/userinfo.email%26access_type%3Doffline%26from_login%3D1%26as%3D-270badd61a3e150b&btmpl=authsub&scc=1&oauth=1";
+            }
+            var app = angular.module('myApp', []);
+            app.controller('myCtrl', function ($scope) {
+                debugger;
+                $scope.companyInfo = { "Name": "" };
+                $scope.showSpinner = true;
+                $scope.contactDetails = { FirstName: "", LastName: "", Email: "", Password__c: "", MailingPostalCode: "", MailingCountry: "", MailingStreet: "", AccountId: "" };
+                $scope.contactDetails.FirstName = first_name;
+                $scope.contactDetails.Email = gemail;
+                $scope.registrationPage = false;
+                $scope.userName = '';
+                $scope.userPassword = '';
+                if (isRegistration == "true") {
+                    $scope.registrationPage = true;
+                } else {
+                    $scope.loginPage = true;
+
+                }
+                $scope.signUpMap;
+                RegistrationForm_Controller.getSignupSettings(function (result, event) {
+
+                    debugger;
+                    if (event.status && result != null) {
+
+                        signUpMap = result;
+                    }
+                    $scope.showSpinner = false;
+                },
+                    { escape: false }
+                );
+
+
+                $scope.saveContact = function () {
+                    debugger;
+                    $scope.registrationPage = true;
+                    $scope.loginPage = false;
+                    $scope.forgetpass = false;
+
+                    if ($scope.contactDetails.LastName == "") {
+                        Swal.fire(
+                            '',
+                            'Please enter Last Name',
+                            'error'
+                        );
+                        return;
+                    }
+                    if ($scope.contactDetails.Password__c == "" || $scope.contactDetails.Password__c == undefined) {
+                        Swal.fire(
+                            '',
+                            'Please enter your password',
+                            'error'
+                        );
+                        return;
+                    }
+                    if ($scope.companyInfo.Name == undefined || $scope.companyInfo.Name == "") {
+                        Swal.fire(
+                            '',
+                            'Please enter Company Name',
+                            'error'
+                        );
+                        return;
+                    }
+                    $scope.showSpinner = true;
+                    RegistrationForm_Controller.insertContact($scope.contactDetails, $scope.companyInfo.Name, function (result, event) {
+                        if (event.status && result != null) {
+                            debugger;
+                            Swal.fire(
+                                'Well Done',
+                                'Registration Form Submitted Successfully!',
+                                'Success'
+                            );
+                            $scope.contactDetails = result;
+                            $scope.$apply();
+                            var sitePrefix = window.location.href.includes('/apex') ? '/apex' : '/ApplicantDashboard';
+                            debugger;
+                            window.location.replace(window.location.origin + sitePrefix + '/ApplicantPortal?id=' + result + '#/Home');
+                        }
+                        $scope.showSpinner = false;
+                    },
+                        { escape: false }
+                    );
+                }
+
+                $scope.showRegForm = function () {
+                    $scope.registrationPage = true;
+                    $scope.loginPage = false;
+                    $scope.forgetpass = false;
+                }
+                $scope.showLoginForm = function () {
+                    $scope.registrationPage = false;
+                    $scope.loginPage = true;
+                    $scope.forgetpass = false;
+                }
+                $scope.loginDetails = { userName: "", userPassword: "" };
+
+                $scope.loginUser = function () {
+                    debugger;
+
+                    $scope.registrationPage = false;
+                    $scope.loginPage = true;
+                    $scope.forgetpass = false;
+
+                    $scope.userName;
+                    $scope.userPassword;
+                    $scope.showSpinner = true;
+                    RegistrationForm_Controller.loginUser($scope.loginDetails.userName, $scope.loginDetails.userPassword, function (result, event) {
+                        if (event.status && result != null) {
+                            $scope.Profile = result;
+                            $scope.hashcodeId = result.Login_Hash_Code__c;
+                            $scope.userLoggedIn = true;
+                            Swal.fire(
+                                '',
+                                'LoggedIn Successfully!',
+                                'success'
+                            )
+                            $scope.$apply();
+                            debugger;
+                            var sitePrefix = window.location.href.includes('/apex') ? '/apex' : '/ApplicantDashboard';
+                            window.location.replace(window.location.origin + sitePrefix + '/ApplicantPortal?id=' + $scope.hashcodeId + '#/Home');
+                        }
+                        else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Please enter the correct Username and Password!'
+                            })
+                        }
+                    }, { escape: false })
+                    $scope.showSpinner = false;
+                    $scope.$apply();
+                }
+
+                $scope.forgotpass = function () {
+                    $scope.registrationPage = false;
+                    $scope.loginPage = false;
+                    $scope.forgetpass = true;
+
+                }
+                $scope.passwordEmail = { userName: "" };
+
+                $scope.resetpassword = function () {
+
+                    debugger;
+                    console.log($scope.userName);
+
+                    $scope.userName;
+                    RegistrationForm_Controller.ForgotPassapplication($scope.passwordEmail.userName, function (result, event) {
+                        debugger;
+                        if (event.status && result != null) {
+                            Swal.fire(
+                                '',
+                                'Check Your Registered Email!',
+                                'success'
+                            )
+                        }
+                    })
+
+                }
+
+            });
+        </script>
+    </head>
+
+    <body ng-app="myApp" ng-controller="myCtrl" style="background-color: white;">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:white !important;font-size: 14px;">
+            <div class="container-fluid">
+                <a class="navbar-brand ms-5" href="#/CP_HomePage">
+                    <apex:image url="{!$Resource.Logo}" styleClass="logo" width="100%" height="100%" />
+                </a>
+            </div>
+        </nav>
+        <!-- <div class="container px-4" ng-if="registrationPage">
+            <div class="card h-100" style="width: 100%; margin: 5%;">
+                <div class="row"></div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <apex:image url="{!$Resource.LoginSignUp}" styleClass="logo" width="100%" height="100%" />
+                    </div>
+                    <div class="col-md-9 justify-content-around">
+                        <div class="row" style="margin-top: 10%; padding-left: 5%; padding-right: 5%;">
+                            <h2>
+                                <u style="text-decoration-color:Darkorange">Registration Form</u>
+                            </h2>
+                        </div>
+                        <div class="row" style="margin-top: 5%; padding-left: 5%; padding-right: 5%;">
+                            <div class="col-md-6">
+                                <label class="control-label" style="text: 2px solid LightBlue;">
+                                    <b>First Name</b>
+                                </label>
+                                <input name="firstname" placeholder="FirstName" class="form-control" type="text" ng-model="contactDetails.FirstName" style="border: 2px solid LightBlue;"
+                                />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label" style="text: 2px solid LightBlue;">
+                                    <b>Last Name</b>
+                                </label>
+                                <span class="required-asterisk" style="color:red;">*</span>
+                                <input name="lastname" placeholder="LastName" class="form-control" type="text" ng-model="contactDetails.LastName" style="border: 2px solid LightBlue;"
+                                />
+                            </div>
+                            <div class="col-md-6" style="margin-top: 3%;">
+                                <label class="control-label" style="text: 2px solid LightBlue;">
+                                    <b>Company / Institute</b>
+                                </label>
+                                <span class="required-asterisk" style="color:red;">*</span>
+                                <input name="companyname" placeholder="CompanyName" class="form-control" type="text" ng-model="companyInfo.Name" required="true"
+                                    ng-required="companyInfo.Name" style="border: 2px solid LightBlue;" />
+                            </div>
+                            <div class="col-md-6" style="margin-top: 3%;">
+                                <label class="control-label" style="text: 2px solid LightBlue;">
+                                    <b>Email</b>
+                                </label>
+                                <input name="Email" placeholder="Email" class="form-control" type="text" ng-model="contactDetails.Email" style="border: 2px solid LightBlue;"
+                                />
+                            </div>
+                            <div class="col-md-6" style="margin-top: 3%;">
+                                <label class="control-label" style="text: 2px solid LightBlue;">
+                                    <b>Password</b>
+                                </label>
+                                <input name="Password" placeholder="Password" class="form-control" type="password" ng-model="contactDetails.Password__c"
+                                    style="border: 2px solid LightBlue;" />
+                            </div>
+                            <div class="col-md-6" style="margin-top: 3%;">
+                                <label class="control-label" style="text: 2px solid LightBlue;">
+                                    <b>Homepage URL</b>
+                                </label>
+                                <input name="Homepage URL" placeholder="Homepage URL" class="form-control" type="url" ng-model="contactDetails.Homepage_URL__c"
+                                    style="border: 2px solid LightBlue;" />
+                            </div>
+                            <div class="col-md-7" style="margin-top: 3%;">
+                                <button class="btn btn-lg btn-dark btn-login fw-bold text-uppercase" type="submit" ng-click="saveContact()" style="padding-left: 20%; padding-right: 20%;">Register</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row"></div>
+            </div>
+        </div> -->
+        <div class="container mt-5" ng-if="registrationPage">
+            <div class="card m-lr-singup">
+                <div class="row">
+                    <div class="col-md-8 justify-content-around p-5">
+                        <div class="row mb-3">
+                            <h5>Registration</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="txtFirstName" ng-model="contactDetails.FirstName" />
+                                    <label for="txtFirstName text-muted">First name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="txtLastName" ng-model="contactDetails.LastName" />
+                                    <label for="txtLastName">Last name</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="txtOrgType" ng-model="companyInfo.Name" />
+                                    <label for="txtOrgType">Company/Institute</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="txtUrl" ng-model="contactDetails.Homepage_URL__c" />
+                                    <label for="txtUrl">Homepage URL</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="txtEmail" ng-model="contactDetails.Email" />
+                                    <label for="txtEmail">Email address</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input type="password" class="form-control" id="txtPassword" ng-model="contactDetails.Password__c" />
+                                    <label for="txtPassword">Password</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="blue-btn float-end ms-3" type="submit" ng-click="saveContact()">Register</button>
+                                <button class="blue-bordered-btn float-end" type="button" ng-click="showLoginForm()">Back</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-center justify-content-center">
+                        <apex:image url="{!$Resource.LoginSignUp}" styleClass="img-fluid box" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="container px-4" ng-if="loginPage">
+                <div class="card h-100" style= "width: 100%; margin: 5%;">
+                        <div class="row"></div>
+                        <div class="row">
+                            <div class = "col-md-3">
+                                <apex:image url="{!$Resource.LoginSignUp}" styleClass="logo" width="100%" height="100%" />
+                            </div>
+                            <div class="col-md-9">
+                                <div class="row" style="margin-top: 10%;">
+                                    <h2><u style="text-decoration-color:Darkorange">LOGIN</u></h2>
+                                </div>
+                                <div class="row" style="margin-top: 5%;">
+                                    <div class="col-md-6">
+                                        <label for="floatingInputUsername" style="text: 2px solid LightBlue;">Username</label>
+                                        <input type="text" class="form-control" placeholder="username" ng-model="loginDetails.userName" style="border: 2px solid LightBlue;" />
+                                    </div>
+                                    <div class="col-md-6"></div>
+
+                                    <div class="col-md-6" style="margin-top: 2%;">
+                                        <label for="floatingPassword" style="text: 2px solid LightBlue;">Password</label>
+                                        <input type="password" class="form-control" placeholder="Password" ng-model="loginDetails.userPassword" style="border: 2px solid LightBlue;" />
+                                    </div>
+                                    <div class="col-md-6"></div>
+
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-2">
+                                        <a href="#" style="color:DarkOrange; margin-top: 1%;" ng-click="forgotpass()">Forgot password?</a>
+                                    </div>
+                                    <div class="col-md-6"></div>
+
+                                    <div class="col-md-3" style="margin-top: 2%;">
+                                        <a href="#" class="google btn" style="border: 2px solid LightBlue;" onclick="myFunctionforgoogle()" id="googleUrlId"><i class="fa fa-google fa-fw">
+                                        </i> SignUp with Google+
+                                      </a> 
+                                    </div>
+                                    <div class="col-md-3" style="margin-top: 2%;">
+                                        <a href="#" class="fb btn" style="border: 2px solid LightBlue;" onclick="myFunction()" id="facebookUrlId"><i class="fa fa-facebook fa-fw">
+                                        </i> SignUp with Facebook
+                                      </a> 
+                                    </div>
+                                    <div class="col-md-6"></div>
+
+                                    <div class="col-md-7" style="margin-top: 2%;">
+                                        <button class="btn btn-lg btn-dark btn-login fw-bold text-uppercase" type="submit" ng-click="loginUser()" style="padding-left: 37.5%; padding-right: 37.5%;">Login</button>
+                                    </div>
+                                    <div class="col-md-5"></div>
+
+                                    <div class="col-md-6" style="margin-top: 2%;">
+                                        <a class="small" style="color: DarkOrange" ng-click="showRegForm()">Don't have an account? Sign Up</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row"></div>
+                </div>
+               
+            </div> -->
+        <div class="container" ng-if="loginPage">
+            <div class="row justify-content-around ms-5">
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-6 d-flex align-items-center justify-content-center">
+                            <apex:image url="{!$Resource.LoginImage3}" styleClass="img-fluid box" />
+                        </div>
+                        <div class="col-md-6 pt-5 pe-5">
+                            <div class="row">
+                                <div class="col-md-6 float-start">Sign in</div>
+                                <div class="col-md-6 float-end">or
+                                    <a href="#" ng-click="showRegForm()">create an account</a>
+                                </div>
+                            </div>
+                            <div class="row pt-3">
+                                <div class="col-md-12">
+                                    <div class="d-grid gap-2">
+                                        <a href="#" class="blue-bordered-btn social-media-btn p-2" onclick="myFunctionforgoogle()" id="googleUrlId">
+                                            <i class="fa-brands fa-google pe-5"></i>Sign in with Google</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 pt-3">
+                                    <div class="d-grid gap-2">
+                                        <a href="#" onclick="myFunction()" id="facebookUrlId" class="blue-bordered-btn social-media-btn p-2">
+                                            <i class="fa-brands fa-square-facebook pe-4"></i>Sign in with Facebook</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 pt-3">
+                                    <div class="hr-label">
+                                        <span>or</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 pt-1">
+                                    <label for="txtusername" class="form-label">User name</label>
+                                    <input type="text" class="form-control" id="txtusername" ng-model="loginDetails.userName" placeholder="Please enter username"
+                                    />
+                                </div>
+                                <div class="col-md-12 pt-3">
+                                    <label for="txtpassword" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="txtpassword" ng-model="loginDetails.userPassword" placeholder="Please enter password"
+                                    />
+                                    <div class="float-end">
+                                        <a href="#" ng-click="forgotpass()">Forgot Password?</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 pt-3">
+                                    <div class="d-grid gap-2">
+                                        <button type="submit" ng-click="loginUser()" class="blue-btn">
+                                            <i class="fa-solid fa-lock pe-5"></i>Login</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                    <div class="col-md-6 d-flex align-items-center justify-content-center">
+                        <apex:image url="{!$Resource.Logo}" styleClass="img-fluid box" />
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <h2 class="heading-border">Login</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="floatingInputUsername">Username</label>
+                                <input type="text" class="form-control" placeholder="username" ng-model="loginDetails.userName" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="floatingPassword">Password</label>
+                                <input type="password" class="form-control" placeholder="Password" ng-model="loginDetails.userPassword" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a href="#" ng-click="forgotpass()">Forgot password?</a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#" class="google btn" onclick="myFunctionforgoogle()" id="googleUrlId">
+                                    <i class="fa fa-google fa-fw">
+                                    </i> Sign in with Google+
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#" class="fb btn" onclick="myFunction()" id="facebookUrlId">
+                                    <i class="fa fa-facebook fa-fw">
+                                    </i> Sign in with Facebook
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <button class="btn btn-lg btn-dark btn-login fw-bold text-uppercase" type="submit" ng-click="loginUser()" style="padding-left: 37.5%; padding-right: 37.5%;">Login</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a class="small" ng-click="showRegForm()">Don't have an account? Sign Up</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                </div>
+            </div>
+        </div>
+        <!-- forgotpass -->
+        <!-- <div class="container px-4" ng-if="forgetpass">
+                <div class="card h-100" style="width: 100%; margin: 5%;">
+                    <div class="row"></div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <apex:image url="{!$Resource.LoginSignUp}" styleClass="logo" width="100%" height="100%" />
+                        </div>
+                        <div class="col-md-9">
+                            <div class="row" style="margin-top: 10%;">
+                                <h2>
+                                    <u style="text-decoration-color:Darkorange">RESET PASSWORD</u>
+                                </h2>
+                            </div>
+                            <div class="row" style="margin-top: 5%;">
+                                <div class="col-md-6">
+                                    <label for="floatingInputUsername" style="text: 2px solid LightBlue;">Username</label>
+                                    <input type="text" class="form-control" placeholder="username" ng-model="passwordEmail.userName" style="border: 2px solid LightBlue;"
+                                    />
+                                </div>
+                                <div class="col-md-6"></div>
+
+                                <div class="col-md-7" style="margin-top: 2%;">
+                                    <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" ng-click="resetpassword()" style="padding-left: 37.5%; padding-right: 37.5%;"
+                                        type="submit">Reset</button>
+                                </div>
+                                <div class="col-md-6"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row"></div>
+                </div>
+            </div> -->
+        <div class="container mt-5" ng-if="forgetpass">
+            <div class="row justify-content-center">
+                <div class="col-md-6 float-center">
+                    <h6>Forgot Password</h6>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6 mb-3 mt-2">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="txtUsernamefp" ng-model="contactDetails.Password__c" placeholder="Enter user name"/>
+                        <label for="txtUsernamefp">Enter user name</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6 float-end">
+                    <div class="d-grid gap-2 mb-3">
+                        <button class="blue-btn" ng-click="resetpassword()" type="submit">Reset</button>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button class="blue-bordered-btn" ng-click="showLoginForm()" type="button">Back</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- forgotpass -->
+    </body>
+
+    </html>
+</apex:page>

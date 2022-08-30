@@ -1,0 +1,29 @@
+<apex:page sidebar="false" showHeader="false" controller="RegistrationForm_Controller" action="{!googleAuth}"> 
+    <script>
+	debugger;
+     
+
+    console.warn("{!hasCode}");
+    let email = encodeURIComponent('{!gId}');
+    let firstName = encodeURIComponent('{!gFname}');
+    var hashcode = '{!hasCode}';
+    var SignupCustomer = '{!SignupCustomer}';
+    let SignupCandidate = encodeURIComponent('{!SignupCandidate}');
+    let docUplaodCustomer = encodeURIComponent('{!docUplaodCustomer}');
+    
+    
+   //  window.location.replace='https://indo-germansciencetechnologycentre--dev--c.visualforce.com/apex/ApplicantPortal?id='+hashcode;
+    let mainURL = window.location.origin+'/apex';
+    var sitePrefix = window.location.href.includes('/apex') ? '/apex' : '/ApplicantDashboard';   
+            
+    if(SignupCandidate = "true" && hashcode == ""){
+       // window.location.replace("{!$Label.CandidateSiteURL}" + "apex/RegistrationForm?gemail="+email+'&first_name='+firstName+'&signUp=customer&register=true');
+        window.location.replace(window.location.origin +sitePrefix+"/RegistrationForm?gemail="+email+'&first_name='+firstName+'&signUp=customer&register=true');
+    }else{
+        debugger;
+       // window.location.replace('https://indo-germansciencetechnologycentre--dev--c.visualforce.com/apex/ApplicantPortal?id='+'{!hasCode}');    
+        window.location.replace(window.location.origin +sitePrefix+"/ApplicantPortal?id="+hashcode+"#/Home");  
+    } 
+    
+    </script>
+</apex:page>

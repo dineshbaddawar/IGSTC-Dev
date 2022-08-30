@@ -1,0 +1,114 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false">
+    <html>
+        <div ng-controller="participant_ctrl">
+            <head>
+                <c:Libraries ></c:Libraries>
+            <script>
+                var userId = '{!$CurrentPage.parameters.id}';
+            </script>
+            <apex:stylesheet value="{!$Resource.ApplicantPortalCSS}" />
+            </head>
+
+            <body>
+                <div class="container px-4">
+                    <div class="card h-100 m-5">
+                    <div class="card-header">
+                        <h2 class="p-3">
+                                <b>Participants</b>
+                        </h2>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <h4 class="p-3"><u style="text-decoration-color:Darkorange"><b>Indian Participants : </b></u></h4>
+                            <tr class="font-tbl">
+                                <th>Sr.No.</th>
+                                <th>Name</th>
+                                <th>Affiliation</th>
+                                <th>Email</th>
+                                <th>Phone No.</th>
+                                <th>Whether the participant is presenting in the workshop?</th>
+                            </tr>
+                            <tr class="font-tbl" ng-repeat="applicnt in indianList">
+                                <td>{{$index + 1}}</td>
+                                <td>
+                                    <input type="text" class="form-control" ng-model="applicnt.LastName" />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" ng-model="applicnt.Affiliation__c" />
+                                </td>
+                                <td>
+                                    <input type="email" class="form-control" ng-model="applicnt.Email" />
+                                </td>
+                                <td>
+                                    <input type="tel" class="form-control" ng-model="applicnt.Phone"  />
+                                </td>
+                                <td>
+                                    <select class="form-control" aria-label="Default select example" ng-model="applicnt.Presenting_Workshop__c">
+                                        <option value="none" ng-selected="true">--None--</option>
+                                        <option ng-repeat="staff in presentingWorkshop">{{staff}}</option>
+                                    </select>
+                                </td>
+                                <td class="text-center">
+                                    <a type="button" ng-click="addIndianRow()">
+                                        <i class="fa-solid fa-circle-plus fa-2x text-success"></i>
+                                    </a>
+                                    <a type="button" ng-click="deleteIndianRow($index)">
+                                        <i class="fa-solid fa-circle-xmark fa-2x text-danger"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table><br/><br/>
+
+                    <table class="table">
+                        <thead>
+                            <h4 class="p-3"><u style="text-decoration-color:Darkorange"><b>German Participants : </b></u></h4>
+                            <tr class="font-tbl">
+                                <th>Sr.No.</th>
+                                <th>Name</th>
+                                <th>Affiliation</th>
+                                <th>Email</th>
+                                <th>Phone No.</th>
+                                <th>Whether the participant is presenting in the workshop?</th>
+                            </tr>
+                            <tr class="font-tbl" ng-repeat="applicant in germanList">
+                                <td>{{$index + 1}}</td>
+                                <td>
+                                    <input type="text" class="form-control" ng-model="applicant.LastName" />
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" ng-model="applicant.Affiliation__c" />
+                                </td>
+                                <td>
+                                    <input type="email" class="form-control" ng-model="applicant.Email" />
+                                </td>
+                                <td>
+                                    <input type="tel" class="form-control" ng-model="applicant.Phone"  />
+                                </td>
+                                <td>
+                                    <select class="form-control" aria-label="Default select example" ng-model="applicant.Presenting_Workshop__c">
+                                        <option value="none" ng-selected="true">--None--</option>
+                                        <option ng-repeat="staff in presentingWorkshop">{{staff}}</option>
+                                    </select>
+                                </td>
+                                <td class="text-center">
+                                    <a type="button" ng-click="addGermanRow()">
+                                        <i class="fa-solid fa-circle-plus fa-2x text-success"></i>
+                                    </a>
+                                    <a type="button" ng-click="deleteGermanRow($index)">
+                                        <i class="fa-solid fa-circle-xmark fa-2x text-danger"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div class="card-footer">
+                        <button type="button" class="blue-btn float-end me-4"  ng-click="saveDetails()">Submit and Next<i class="fa-solid fa-arrow-right ms-3"></i></button>    
+                        <button type="button" class="blue-bordered-btn float-end me-4"  ng-click="redirectPageURL('Proposal_Details')"><i class="fa-solid fa-arrow-left i-padding"></i>Previous</button> &nbsp;
+                    </div>
+                   </div>
+                </div>
+            </body>
+        </div>
+    </html>
+</apex:page>

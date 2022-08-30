@@ -1,0 +1,64 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false">
+  <html>
+  <div ng-controller='myProp_ctrl'>
+
+  <head>
+    <apex:stylesheet value="{!$Resource.ApplicantPortalCSS}" />
+  </head>
+  <div class="container px-4">
+    <div class="card m-5">
+      <div class="card-header">
+        <h2 class="p-3">
+          <b>My Proposal</b>
+        </h2>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Proposal Name</th>
+            <th scope="col">Title Of Proposal</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{project.Name}}</td>
+            <td>{{project.Title_Of__c}}</td>
+            <td>
+              <button type="button" class="blue-btn" ng-click="redirectPageURL('ProjectDetailPage')">
+                <i class="fa-solid fa-eye me-3"></i>View</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+  <!-- <div ng-controller='myProp_ctrl'>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8 mt-2 mb-2">
+    
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Proposal Name</th>
+                  <th scope="col">Title Of Proposal</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>{{project.Name}}</th>
+                  <th>{{project.Title_Of__c}}</th>
+                  <th><button type="button" class="btn btn-primary" ng-click="redirectPageURL('ProjectDetailPage')">View</button></th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+      </div> -->
+
+  </html>
+</apex:page>

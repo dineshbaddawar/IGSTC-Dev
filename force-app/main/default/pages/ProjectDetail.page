@@ -1,0 +1,192 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false">
+    <html>
+        <div ng-controller="projectCtrl">
+        <head>
+            <c:Libraries ></c:Libraries>
+            <script>
+                debugger;
+            var userId = '{!$CurrentPage.parameters.id}';
+            var tabValues = [];
+            var workingDaysValues = [];
+            var candidateId;
+            var getAllEvents;
+            var eventsOnLoad;
+            var maxStringSize = 6000000;    //Maximum String size is 6,000,000 characters 6 MB
+            var maxFileSize = 4350000;      //After Base64 Encoding, this is the max file size
+            var chunkSize = 950000;         //Maximum Javascript Remoting message size is 1,000,000 characters
+            var attachment;
+            var attachmentName;
+            var fileSize;
+            var positionIndex;
+            var doneUploading;
+            var blobData;
+            </script>
+            <style> 
+          body{
+    background-color:#f2f7fb;
+}
+
+.mt-100{
+    margin-top:100px;
+}
+/* .card {
+    border-radius: 5px;
+    -webkit-box-shadow: 0 0 5px 0 rgba(43,43,43,.1), 0 11px 6px -7px rgba(43,43,43,.1);
+    box-shadow: 0 0 5px 0 rgba(43,43,43,.1), 0 11px 6px -7px rgba(43,43,43,.1);
+    border: none;
+    margin-bottom: 30px;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+.card .card-header {
+    background-color: transparent;
+    border-bottom: none;
+    padding: 20px;
+    position: relative;
+}
+
+.card .card-header h5:after {
+    content: "";
+    background-color: #d2d2d2;
+    width: 101px;
+    height: 1px;
+    position: absolute;
+    bottom: 6px;
+    left: 20px;
+}
+
+.card .card-block {
+    padding: 1.25rem;
+} */
+
+.dropzone.dz-clickable {
+    cursor: pointer;
+}
+
+.dropzone {
+    min-height: 150px;
+    border: 1px solid rgba(42,42,42,0.05);
+    background: rgba(204,204,204,0.15);
+    padding: 20px;
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px 0 rgba(43,43,43,0.1);
+    box-shadow: inset 0 0 5px 0 rgba(43,43,43,0.1);
+}
+
+.m-t-20 {
+    margin-top: 20px;
+}
+
+.btn-primary, .sweet-alert button.confirm, .wizard>.actions a {
+    background-color: #4099ff;
+    border-color: #4099ff;
+    color: #fff;
+    cursor: pointer;
+    -webkit-transition: all ease-in .3s;
+    transition: all ease-in .3s;
+}
+
+.btn {
+    border-radius: 2px;
+    text-transform: capitalize;
+    font-size: 15px;
+    padding: 10px 19px;
+    cursor: pointer;
+}
+.ta-editor {
+  min-height: 300px;
+  height: auto;
+  overflow: auto;
+  font-family: inherit;
+  font-size: 100%;
+}
+            </style>
+        </head>
+        
+        <body>
+
+            <!-- <div class="container px-4">
+                <div class="card h-100 m-5">
+                    <div class="card-header">
+                        <h2 class="p-3">
+                            <b>Project Details</b>
+                        </h2>
+                    </div>
+                    <div class="row p-5">
+                        <div class="col-md-12 mb-5">
+                                <h4>Main objectives of the research approach - as bullet points</h4>
+                            <div text-angular="text-angular" name="htmlcontent" ng-model="proposalDetails.Research_Approach_Objectives__c" ta-disabled='true'
+                                ng-readonly="true"></div>
+                        </div>
+                        <div class="col-md-12 mb-5">
+                            <label class="control-label">
+                                <h4>Current state of the art in the field</h4>
+                            </label>
+                            <textarea class="form-control" rows="4" cols="50" ng-model="proposalDetails.Current_State_Of_The_Art__c" size="100" maxlength="131072"
+                                ng-disabled="disable"></textarea>
+                        </div>
+                        <div class="col-md-12 mb-5">
+                                <h4>Project description including work packages/work distribution amongst partners</h4>
+                            <div text-angular="text-angular" name="htmlcontent" ng-model="proposalDetails.Project_Description__c" ta-disabled='disabled'
+                                ng-disabled="disable"></div>
+                        </div>
+                        <div class="col-md-12 mb-5">
+                            <label class="control-label">
+                                <h4>Expected deliverables as bullet points</h4>
+                            </label>
+                            <div text-angular="text-angular" name="htmlcontent" ng-model="proposalDetails.Expected_Deliverables__c" ta-disabled='disabled'
+                                ng-disabled="disable"></div>
+                        </div>
+                        <div class="col-md-12 mb-5">
+                            <label class="control-label">
+                                <h4>Reasons for and benefits of cooperation including previous collaboration with the partner country</h4>
+                            </label>
+                            <textarea class="form-control" rows="4" cols="50" ng-model="proposalDetails.Reasons_For_And_Benefits_Of_Cooperation__c" size="100"
+                                maxlength="131072" ng-disabled="disable"></textarea>
+                        </div>
+                        <div class="col-md-12 mb-5">
+                            <label class="control-label">
+                                <h4>Equipment</h4>
+                            </label>
+                            <textarea class="form-control" rows="4" cols="50" ng-model="proposalDetails.Equipment__c" size="100" maxlength="131072" ng-disabled="disable"></textarea>
+                        </div>
+                        <div class="col-md-12 mb-5" ng-show="secondstage">
+                            <label class="control-label">
+                                <h4>Criteria For Abandoning the Project</h4>
+                            </label>
+                            <textarea class="form-control" rows="4" cols="50" ng-model="proposalDetails.Criteria_For_Abandoning_The_Project__c" size="100"
+                                maxlength="255" ng-disabled="disable"></textarea>
+                        </div>
+                        <div class="col-md-12 mb-5" ng-show="secondstage">
+                            <label class="control-label">
+                                <h4>Innovative Aspects / IP and Future Potential Utilization Plan</h4>
+                            </label>
+                            <textarea class="form-control" rows="4" cols="50" ng-model="proposalDetails.Innovative_Aspects__c" size="100" maxlength="255"
+                                ng-disabled="disable"></textarea>
+                        </div>
+                        <div class="col-md-12 mb-5" ng-show="secondstage">
+                            <label class="control-label">
+                                <h4>Involvement of young scientists / Research Scholars</h4>
+                            </label>
+                            <textarea class="form-control" rows="4" cols="50" ng-model="proposalDetails.Research_Scholars__c" size="100" maxlength="255"
+                                ng-disabled="disable"></textarea>
+                        </div>
+                        <div class="col-md-12" ng-show="secondstage">
+                            <label class="control-label">
+                                <h4>Necessity Of Funding</h4>
+                            </label>
+                            <textarea class="form-control" rows="4" cols="50" ng-model="proposalDetails.Necessity_Of_Funding__c" size="100" maxlength="255"
+                                ng-disabled="disable"></textarea>
+                        </div>
+                    </div>
+                    <div class="card-footer">                            
+                            <button type="button" class="blue-btn float-end me-4" ng-click="saveDetails()">Submit and Next<i class="fa-solid fa-arrow-right ms-3"></i></button>
+                            <button type="button" class="blue-bordered-btn float-end me-4" ng-click="redirectPageURL('Financial_Overview')"><i class="fa-solid fa-arrow-left i-padding"></i>Previous</button>
+                    </div>
+                </div>
+            </div> -->
+        </body>
+        </div>
+    </html>
+</apex:page>

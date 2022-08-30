@@ -1,0 +1,140 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false">
+    <html>
+        <div ng-controller="coordinators_ctrl">
+        <head>
+            <script>
+                var userId = '{!$CurrentPage.parameters.id}';
+            </script>
+        </head>
+
+        <body>
+
+            <div class="container px-4">
+                <div class="card h-100" style= "width: 100%; margin: 5%;">
+                    <div class="row" style="margin-top: 10%; padding-left: 5%; padding-right: 5%;">
+                        <h2><u style="text-decoration-color:Darkorange"><b>Co-ordinators Details</b></u></h2>
+                    </div>
+                    <div class="row" style="margin-top: 5%; padding-left: 5%; padding-right: 5%;">
+                        <h4><u style="text-decoration-color:Darkorange"><b>COORDINATOR 1 :</b></u></h4>
+                        <div class="col-md-6" style="margin-top: 2%;">
+                            <label class="control-label"><b>Indian Coordinator</b></label>
+                                <input  name="indian" placeholder="indian" class="form-check-input"  type="checkbox" ng-model="indianCoDetails.Indian__c" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 2%;">
+                            <label class="control-label"><b>German Coordinator</b></label>
+                                <input  name="german" placeholder="german" class="form-check-input"  type="checkbox" ng-model="indianCoDetails.German__c" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%;">
+                            <label class="control-label"><b>Name</b></label>
+                                <input  name="Name" placeholder="Name" class="form-control"  type="text" ng-model="indianCoDetails.LastName" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%;">
+                            <label class="control-label"><b>Department/Division</b></label>
+                                <input  name="Department" placeholder="Department" class="form-control"  type="text" ng-model="indianCoDetails.Department" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%;">
+                            <label class="control-label"><b>Street</b></label>
+                            <input  name="Street" placeholder="Street" class="form-control"  type="text" ng-model="indianCoDetails.MailingStreet" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%">
+                            <label class="control-label"><b>City</b></label>
+                            <input  name="City" placeholder="City" class="form-control"  type="text" ng-model="indianCoDetails.MailingCity" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%;">
+                            <label class="control-label"><b>State</b></label>
+                            <input  name="State" placeholder="State" class="form-control"  type="text" ng-model="indianCoDetails.MailingState" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%">
+                            <label class="control-label"><b>Post Code</b></label>
+                            <input  name="Post Code" placeholder="Post Code" class="form-control"  type="text" ng-model="indianCoDetails.MailingPostalCode" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%;">
+                            <label class="control-label"><b>Country</b></label>
+                            <input  name="Country" placeholder="Country" class="form-control"  type="text" ng-model="indianCoDetails.MailingCountry" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%">
+                            <label class="control-label"><b>Head Of Project / Name of Workshop Coordinator(PI)</b></label>
+                            <input  name="Head Of Project" placeholder="Head Of Project" class="form-control"  type="text" ng-model="indianCoDetails.Head_Of_Project__c" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%;">
+                            <label class="control-label"><b>Email</b></label>
+                            <input  name="Email" placeholder="Email" class="form-control"  type="email" ng-model="indianCoDetails.Email" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%">
+                            <label class="control-label"><b>Phone</b></label>
+                            <input  name="Phone" placeholder="Phone" class="form-control"  type="tel" ng-model="indianCoDetails.Phone" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%">
+                            <label class="control-label"><b>Homepage URL</b></label>
+                            <input  name="Homepage URL" placeholder="Homepage URL" class="form-control"  type="url" ng-model="indianCoDetails.Homepage_URL__c" />
+                        </div>
+                    </div>
+
+
+                    <div class="row" style="margin-top: 5%; padding-left: 5%; padding-right: 5%;">
+                        <h4><u style="text-decoration-color:Darkorange"><b>COORDINATOR 2 :</b></u></h4>
+                        <div class="col-md-6" style="margin-top: 2%;">
+                            <label class="control-label"><b>Indian Coordinator</b></label>
+                                <input  name="indian" placeholder="indian" class="form-check-input"  type="checkbox" ng-model="germanCoDetails.Indian__c" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 2%;">
+                            <label class="control-label"><b>German Coordinator</b></label>
+                                <input  name="german" placeholder="german" class="form-check-input"  type="checkbox" ng-model="germanCoDetails.German__c" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%;">
+                            <label class="control-label"><b>Name</b></label>
+                                <input  name="Name" placeholder="Name" class="form-control"  type="text" ng-model="germanCoDetails.LastName" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%;">
+                            <label class="control-label"><b>Department/Division</b></label>
+                                <input  name="Department" placeholder="Department" class="form-control"  type="text" ng-model="germanCoDetails.Department" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%;">
+                            <label class="control-label"><b>Street</b></label>
+                            <input  name="Street" placeholder="Street" class="form-control"  type="text" ng-model="germanCoDetails.MailingStreet" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%">
+                            <label class="control-label"><b>City</b></label>
+                            <input  name="City" placeholder="City" class="form-control"  type="text" ng-model="germanCoDetails.MailingCity" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%;">
+                            <label class="control-label"><b>State</b></label>
+                            <input  name="State" placeholder="State" class="form-control"  type="text" ng-model="germanCoDetails.MailingState" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%">
+                            <label class="control-label"><b>Post Code</b></label>
+                            <input  name="Post Code" placeholder="Post Code" class="form-control"  type="text" ng-model="germanCoDetails.MailingPostalCode" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%;">
+                            <label class="control-label"><b>Country</b></label>
+                            <input  name="Country" placeholder="Country" class="form-control"  type="text" ng-model="germanCoDetails.MailingCountry" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%">
+                            <label class="control-label"><b>Head Of Project / Name of Workshop Coordinator(PI)</b></label>
+                            <input  name="Head Of Project" placeholder="Head Of Project" class="form-control"  type="text" ng-model="germanCoDetails.Head_Of_Project__c" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%;">
+                            <label class="control-label"><b>Email</b></label>
+                            <input  name="Email" placeholder="Email" class="form-control"  type="email" ng-model="germanCoDetails.Email" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%">
+                            <label class="control-label"><b>Phone</b></label>
+                            <input  name="Phone" placeholder="Phone" class="form-control"  type="tel" ng-model="germanCoDetails.Phone" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%">
+                            <label class="control-label"><b>Homepage URL</b></label>
+                            <input  name="Homepage URL" placeholder="Homepage URL" class="form-control"  type="url" ng-model="germanCoDetails.Homepage_URL__c" />
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <!-- <div class="col-12"> -->
+                            <button type="button" class="blue-btn float-end me-4" ng-click="saveDetails()"><i class="fa-solid fa-check i-padding"></i>Submit and Next</button>
+                            <button type="button" class="blue-bordered-btn float-end me-4" ng-click="redirectPageURL('BasicDetails_Page')"><i class="fa-solid fa-arrow-left i-padding"></i>Previous</button>
+                    <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </body>
+        </div>
+    </html>
+</apex:page>

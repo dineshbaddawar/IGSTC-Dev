@@ -1,0 +1,99 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false">
+    <html>
+        <div ng-controller="networkmeet_ctrl">
+        <head>
+            <c:Libraries ></c:Libraries>
+            <script>
+                var userId = '{!$CurrentPage.parameters.id}'
+            </script>
+            <style>
+                body {
+                background: #F5F5F5;
+                }
+                
+                .card-img-left {
+                width: 45%;
+                /* Link to your background image using in the property below! */
+                background: scroll center url('https://source.unsplash.com/WEQbe2jBg40/414x512');
+                background-size: cover;
+                }
+                
+                .loadingBackground {
+                position: fixed;
+                height: 100%;
+                width: 100%;
+                background: #F6F6F6;
+                z-index: 11111;
+                opacity: 0.7;
+                top: 0px;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                }
+                .loading {
+                top: 50%;
+                left: 50%;
+                margin: -50px 0px 0px -50px;
+                z-index: 111111;
+                position: fixed;
+                }
+                @media only screen and (min-width:850px) and (max-width:1000px){
+                .padding_1000{
+                padding-left:20px !important;
+                padding-right:20px !important;
+                }
+                }
+                @media only screen and (max-width: 750px) {
+                @media screen and (min-device-width: 650px) and (max-device-width: 750px) { 
+                .col{
+                padding:unset;
+                }
+                }
+                .col{
+                flex-shrink: 0 !important;
+                flex: unset;
+                
+                }
+                }
+            </style>
+        </head>
+        
+        <body>
+            <div class="container mt-3">
+                <h3>Meeting Details</h3>
+                <div ng-repeat="appli in applicantDetails">
+                    <label class="control-label">Name</label>
+                    <input name="name" type="text" class="form-control" placeholder="Name" ng-model="appli.Name" ng-disabled="true"/>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width:10%;">Meeting Agenda</th>
+                                <th style="width:10%;">Meeting Venue</th>
+                                <th style="width:10%;">Tentative Date</th>
+                                <th style="width:10%;">Actual Date</th>
+                            </tr>
+                            <tr ng-repeat="applicnt in appli.Network_Meetings__r">
+                                
+                                <td><input type="text" class="form-control" ng-model="applicnt.Meeting_Agenda__c" size="100"/></td>
+                                <td><input type="text" class="form-control" ng-model="applicnt.Meeting_Venue__c" size="100"/></td>
+                                <td><input type="date" class="form-control" ng-model="applicnt.Tentative_Date__c" size="100"/></td>
+                                <td><input type="date" class="form-control" ng-model="applicnt.Actual_Date__c" size="100"/></td>
+                                <td>
+                                    <a type="button" style="padding:5px;" ng-click="deleteRow($parent.$index,$index)"><i class="fa fa-trash" style="font-size:30px" aria-hidden="true"></i></a>
+                                    <a type="button" style="padding:5px;" ng-click="addRow($parent.$index,$index)"><i class="fa fa-plus" style="font-size:30px" aria-hidden="true"></i></a>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                    </div>
+                    <div class="card-footer" style="background:unset;border-top:unset;margin-top:5%;margin-bottom:3%;">
+                        <div class="d-flex justify-content-center justify-content-between">
+                        <button type="button" class="btn btn-primary col-sm-3" style="background: #fff;color: black;border: 1px solid;" ng-click="redirectPageURL('PIDeliverables')">Previous</button> &nbsp;
+                        <button type="button" class="btn btn-primary col-sm-3" style="background: black;border: 1px solid;" ng-click="submitMeetingDetails()">Submit and Next</button>
+                        </div>
+                    </div>
+                </div>
+        </body>
+        </div>
+    </html>
+</apex:page>

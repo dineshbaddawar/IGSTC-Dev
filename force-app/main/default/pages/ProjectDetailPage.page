@@ -1,0 +1,193 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false">
+    <html>
+    <div ng-controller="ProjectDetailCtrl">
+
+        <head>
+            <style>
+                .ta-editor {
+                    min-height: 300px;
+                    height: auto;
+                    overflow: auto;
+                    font-family: inherit;
+                    font-size: 100%;
+                }
+            </style>
+            <apex:stylesheet value="{!$Resource.ApplicantPortalCSS}" />
+        </head>
+
+        <body>
+            <!-- <div class="container px-4">
+                <div class="card h-100" style="width: 100%; margin: 5%;">
+                    <div class="row" style="margin-top: 10%; padding-left: 5%; padding-right: 5%;">
+                        <h2>
+                            <u style="text-decoration-color:Darkorange">
+                                <b>Project Details</b>
+                            </u>
+                        </h2>
+                    </div>
+                    <div class="row" style="margin-top: 5%; padding-left: 5%; padding-right: 5%;">
+                        <div class="col-md-6">
+                            <label class="control-label">
+                                <b>Project Acronym</b>
+                            </label>
+                            <input name="Acronym" placeholder="Acronym" class="form-control" type="text" ng-model="applicantDetails.Acronym__c" maxlength="255"
+                                ng-disabled="disable" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="control-label">
+                                <b>Title Of Proposal</b>
+                            </label>
+                            <input name="Title Of Proposal" placeholder="Title Of Proposal" class="form-control" type="text" ng-model="applicantDetails.Title_Of__c"
+                                maxlength="255" ng-disabled="disable" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%;">
+                            <label class="control-label">
+                                <b>Title des Antrages(In German)</b>
+                            </label>
+                            <input name="Title In German" placeholder="Title In German" class="form-control" type="text" ng-model="applicantDetails.Title_In_German__c"
+                                maxlength="255" ng-disabled="disable" />
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%;">
+                            <label class="control-label">
+                                <b>Duration In Months (Max 36)</b>
+                            </label>
+                            <select class="form-select" aria-label="Default select example" ng-model="applicantDetails.Duration_In_Months_Max_36__c"
+                                ng-disabled="disable">
+                                <option value="none" ng-selected="true">--None--</option>
+                                <option ng-repeat="staff in duration">{{staff}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%">
+                            <label class="control-label">
+                                <b>Project Theme</b>
+                            </label>
+                            <div ng-repeat="theme in thematicAreaToDisplay">
+                                <div>
+                                    <input type="checkbox" ng-checked="theme.checked" ng-click="thematicArea(theme.Id)" ng-disabled="disable"
+                                    />&nbsp; {{theme.Name}} </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" style="margin-top: 3%;" ng-show="secondstage">
+                            <label class="control-label">
+                                <b>Tentative Starting Date</b>
+                            </label>
+                            <span class="required-asterisk" style="color:red;">*</span>
+                            <input name="Tentative Starting Date" placeholder="Tentative Starting Date" class="form-control" ng-init="tentitiveStartDate=(tentitiveStartDate | date:'yyyy-MM-dd')"
+                                type="date" ng-model="tentitiveStartDate" required="true" ng-required="applicantDetails.Tentative_Start_Date__c"
+                                ng-disabled="disable" />
+                        </div>
+                        <div>
+                            <div class="col-md-6" style="margin-top: 3%;">
+                                <label class="control-label">
+                                    <b>Keywords</b>
+                                </label>
+                                <div text-angular="text-angular" name="htmlcontent" ng-model="applicantDetails.KeyWords__c" ta-disabled='true' ng-disabled="disable"></div>
+                            </div>
+                            <div class="col-md-6" style="margin-top: 3%;">
+                                <label class="control-label">
+                                    <b>Summary</b>
+                                </label>
+                                <div text-angular="text-angular" name="htmlcontent" ng-model="applicantDetails.Summary__c" ta-disabled='true' ng-disabled="disable"></div>
+                            </div>
+                        </div>
+                        <div class="card-footer" style="background:unset;border-top:unset; margin-bottom: 3%; margin-top: 3%;">
+                            <div class="d-flex justify-content-center justify-content-between">
+                                <button type="button" class="btn btn-primary col-sm-3" style="background: black;border: 1px solid;" ng-click="saveApplication()">Submit And Next</button>
+                            </div>
+                        </div>                       
+                    </div>
+                </div>
+            </div> -->
+            <div class="container px-4">
+                <div class="card h-100 m-5">
+                    <div class="card-header">
+                        <h2 class="p-3">
+                                <b>Project Details</b>
+                        </h2>
+                    </div>
+                    <div class="row p-5">
+                        <div class="col-md-6 mb-4">
+                            <label class="control-label">
+                                <b>Project Acronym</b>
+                            </label>
+                            <span class="required-asterisk" style="color:red;">*</span>
+                            <input name="Acronym" placeholder="Acronym" class="form-control" type="text" ng-model="applicantDetails.Acronym__c" maxlength="255"
+                                ng-disabled="disable" required="true" ng-required="applicantDetails.Acronym__c" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="control-label">
+                                <b>Title Of Proposal</b>
+                            </label>
+                            <span class="required-asterisk" style="color:red;">*</span>
+                            <input name="Title Of Proposal" placeholder="Title Of Proposal" class="form-control" type="text" ng-model="applicantDetails.Title_Of__c"
+                                maxlength="255" ng-disabled="disable" required="true" ng-required="applicantDetails.Title_Of__c" />
+                        </div>
+                        <div class="col-md-6 mb-5">
+                            <label class="control-label">
+                                <b>Title des Antrages(In German)</b>
+                            </label>
+                            <span class="required-asterisk" style="color:red;">*</span>
+                            <input name="Title In German" placeholder="Title In German" class="form-control" type="text" ng-model="applicantDetails.Title_In_German__c"
+                                maxlength="255" ng-disabled="disable" required="true" ng-required="applicantDetails.Title_In_German__c" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="control-label">
+                                <b>Duration In Months (Max 36)</b>
+                            </label>
+                            <select class="form-control" aria-label="Default select example" ng-model="applicantDetails.Duration_In_Months_Max_36__c"
+                                ng-disabled="disable">
+                                <option value="none" ng-selected="true">--None--</option>
+                                <option ng-repeat="staff in duration">{{staff}}</option>
+                            </select>
+                        </div>
+                        <fieldset class="border p-2 mb-5">
+                            <legend  class="float-none w-auto">Project Theme</legend>                         
+                        <div class="col-md-12">
+                            <!-- <label class="control-label">
+                                <b>Project Theme</b>
+                            </label> -->
+                            <div ng-repeat="theme in thematicAreaToDisplay">
+                                <div>
+                                    <input type="checkbox" ng-checked="theme.checked" ng-click="thematicArea(theme.Id)" ng-disabled="disable"
+                                    />&nbsp; {{theme.Name}} </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                        <div class="col-md-6 mt-5" ng-show="secondstage">
+                            <label class="control-label">
+                                <b>Tentative Starting Date</b>
+                            </label>
+                            <span class="required-asterisk" style="color:red;">*</span>
+                            <input name="Tentative Starting Date" placeholder="Tentative Starting Date" class="form-control" ng-init="tentitiveStartDate=(tentitiveStartDate | date:'yyyy-MM-dd')"
+                                type="date" ng-model="tentitiveStartDate" required="true" ng-required="applicantDetails.Tentative_Start_Date__c" ng-disabled="disable" />
+                        </div>
+                        <div>
+                            <div class="col-md-6">
+                                <label class="control-label">
+                                    <b>Keywords</b>
+                                </label>
+                                <div text-angular="text-angular" name="htmlcontent" ng-model="applicantDetails.KeyWords__c" ta-disabled='true' ng-disabled="disable"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label">
+                                    <b>Summary</b>
+                                </label>
+                                <div text-angular="text-angular" name="htmlcontent" ng-model="applicantDetails.Summary__c" ta-disabled='true' ng-disabled="disable"></div>
+                            </div>
+                        </div>                       
+                        <!--div class="col-md-7" style="margin-top: 3%; margin-bottom: 10%;">
+                                <button class="btn btn-dark" type="submit" ng-click="saveApplication()" style="padding-left: 15%; padding-right: 15%;">Submit And Next</button>
+                            </div-->
+                    </div>
+                    <div class="card-footer">
+                        <!-- <div class="col-12"> -->
+                            <button type="button" class="blue-btn float-end me-4" ng-click="saveApplication()"><i class="fa-solid fa-check i-padding"></i>Submit and Next</button>
+                    <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </body>
+    </div>
+
+    </html>
+</apex:page>

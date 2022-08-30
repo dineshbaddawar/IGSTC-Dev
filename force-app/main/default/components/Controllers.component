@@ -1,0 +1,49 @@
+<apex:component >
+      <script> 
+        angular.module('cp_app', ['ngRoute','angularjs-dropdown-multiselect', 'ui.bootstrap', 'ui.bootstrap.datetimepicker', 'textAngular']); 
+    </script>
+    <script src="{!$Resource.Home}"/> 
+    <script src="{!$Resource.Campaign}"/>
+        <script src="{!$Resource.TestJs}"/>
+        <script src="{!$Resource.Test2}"/>
+        <script src="{!$Resource.ConsortiaDetailPage}"/>
+        <script src="{!$Resource.CampaignTheme}"/> 
+        <script src="{!$Resource.ProjectDetailPage}"/>
+        <script src="{!$Resource.ProgramDetail}"/>
+        <script src="{!$Resource.ApplicantPortal}"/>       
+        <script src="{!$Resource.MyProposal}"/>
+        <script src="{!$Resource.PIDeliverables}"/>
+        <script src="{!$Resource.Network_Meeting}"/>
+        <script src="{!$Resource.Dashboard_IF}"/>
+        <script src="{!$Resource.PersonalInformationIF}"/>
+        <script src="{!$Resource.EduQualificationIF}"/>
+        <script src="{!$Resource.AchievementsIF}"/>
+        <script src="{!$Resource.EmploymentDetails}"/>
+        <script src="{!$Resource.FellowshipDetailsIF}"/>
+        <!-- <script src="{!$Resource.WiserApplicantInformation}"/> -->
+        <script src="{!$Resource.ApplicantInformationSing}"/>
+        <script src="{!$Resource.ProjectDetailsSing}"/>
+         <script src="{!$Resource.ProjectDetailsWiser}"/> 
+        <script src="{!$Resource.SignatureSealsSing}"/>
+        <script src="{!$Resource.SignatureSealsSing}"/>
+        <script src="{!$Resource.Coordinators_Page}"/>
+        <script src="{!$Resource.BasicDetails_Page}"/>
+        <script src="{!$Resource.Proposal_Details}"/>
+        <script src="{!$Resource.Participants}"/>
+        <script src="{!$Resource.Financial_Details}"/>
+
+         <script src="{!$Resource.ConsortiumPartnerInformation}"/>   
+         <script src="{!$Resource.Curriculum_vitae}"/>
+         <script src="{!$Resource.CompanyProfile}"/>
+         <script src="{!$Resource.Financial_Overview}"/>
+         <script src="{!$Resource.ProjectDetail}"/>
+         <script src="{!$Resource.WorkPackages}">
+        	</script>  
+          <script src="{!$Resource.WiserApplicationPage}"/>   
+           <script src="{!$Resource.ApplicantPortalCSS}"/>
+           <script src="{!$Resource.SlickThemeCss}"/>
+           <script src="{!$Resource.SlickCss}"/>
+           <script src="{!$Resource.SmallCss}"/>
+           <script src="{!$Resource.MediumCss}"/>
+           <script src="{!$Resource.LargCss}"/>
+</apex:component>

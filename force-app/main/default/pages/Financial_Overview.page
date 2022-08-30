@@ -1,0 +1,65 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false">
+    <html>
+    <div ng-controller="financialCtrl">
+        <head>
+            <script>
+                var userId = '{!$CurrentPage.parameters.id}';
+            </script>
+            <apex:stylesheet value="{!$Resource.ApplicantPortalCSS}" />
+        </head>
+        <body>
+            
+            <div class="container px-4">
+                <div class="card h-100 m-5">
+                <div class="card-header">
+                    <h2 class="p-3">
+                            <b>Financial Contribution</b>
+                    </h2>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr class="font-tbl">
+                            <th>Name Partner</th>
+                            <th>Own Contribution(B)</th>
+                            <th>IGSTC Funding(C)</th>
+                            <th>Total(A)</th>
+                            <th>% Funding Asked from IGSTC</th>
+                        </tr>
+                        <tr class="font-tbl" ng-repeat="applicnt in financialOverViewList">
+                            <td>{{applicnt.Name}}</td>
+                            <td>
+                                <input type="Number" class="form-control" ng-model="applicnt.Own_Contribution__c" size="100"
+                                    ng-disabled="disable" />
+                            </td>
+                            <td>
+                                <input type="Number" class="form-control" ng-model="applicnt.IGSTC_Contribution__c" size="100"
+                                    ng-disabled="disable" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" ng-disabled="disabled" ng-model="(applicnt.IGSTC_Contribution__c+applicnt.Own_Contribution__c)"
+                                    size="5" maxlength="255" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" ng-disabled="disabled" ng-model="(applicnt.IGSTC_Contribution__c/(applicnt.IGSTC_Contribution__c+applicnt.Own_Contribution__c))*100  | number : 2"
+                                    size="5" maxlength="255" />
+                            </td>
+                        </tr>
+
+                    </thead>
+                </table>
+                <div class="card-footer">
+                    <button type="button" class="blue-btn float-end me-4"  ng-click="submitFinancialDetails()">Submit and Next<i class="fa-solid fa-arrow-right ms-3"></i></button>    
+                    <button type="button" class="blue-bordered-btn float-end me-4"  ng-click="redirectPageURL('ConsortiaDetailPage')"><i class="fa-solid fa-arrow-left i-padding"></i>Previous</button> &nbsp;
+                </div>
+
+                <!--div class="d-flex justify-content-center"><br/>
+                    <button type="button" class="btn btn-primary" ng-click="redirectPageURL('CompanyProfile')">Previous</button> &nbsp;
+                    <button type="button" class="btn btn-primary" ng-click="submitFinancialDetails()">Submit and Next</button>
+                </div-->
+            </div>
+        </div>
+        </body>
+    </div>
+
+    </html>
+</apex:page>
