@@ -143,14 +143,18 @@
             debugger;
             if($scope.consortiaDetails[index].Academia__c == true){
                 $scope.consortiaDetails[index].Industry__c = false;
+                $scope.saveAccountup($scope.consortiaDetails[index]);
                 $scope.openPopup('Institute',index,'');
+                
             }
         }
         $scope.openCompanyPopup = function(index){
             debugger;
             if($scope.consortiaDetails[index].Industry__c == true){
                 $scope.consortiaDetails[index].Academia__c = false;
+                $scope.saveAccountup($scope.consortiaDetails[index]);
                 $scope.openPopup('companyProfile',index,'');
+                
             }
         }
 
@@ -826,11 +830,25 @@
             link.click();
         }
 
-        $scope.saveAccountup = function(){
+        $scope.saveAccountup = function(consortiaDetails){
             debugger;
-            var accdet = $scope.consortiaDetails[$scope.consortiaDetails.length -1];
-            var contacts = $scope.consortiaDetails.Contacts;
-            ApplicantPortal_Contoller.insertAccountAndContact($scope.accountDetailstoInsert, $scope.contactDetailstoInsert, function (result, event) {
+            //var accdet = consortiaDetails;
+           
+            var contacts = consortiaDetails.Contacts;
+            
+            if(consortiaDetails.Contacts != undefined){
+                for (let i = 0; i < contacts.length; i++) {
+                delete(contacts[i]['$$hashKey']);
+            	}
+            }
+            
+            if(consortiaDetails != undefined){
+                var accdet = {"Country_Type__c":consortiaDetails.Country_Type__c,"Email__c":consortiaDetails.Email__c,"Homepage_URL__c":consortiaDetails.Homepage_URL__c,"Name":consortiaDetails.Name};
+            }
+            if(consortiaDetails.Id != undefined){
+                accdet.Id = consortiaDetails.Id;
+            }
+            ApplicantPortal_Contoller.insertAccountAndContact(accdet, contacts, function (result, event) {
                 if(event.status){
                     debugger;
                     $scope.$apply();  

@@ -23,7 +23,8 @@
         <!-- <script src="{!$Resource.WiserApplicantInformation}"/> -->
         <script src="{!$Resource.ApplicantInformationSing}"/>
         <script src="{!$Resource.ProjectDetailsSing}"/>
-         <script src="{!$Resource.ProjectDetailsWiser}"/> 
+        <script src="{!$Resource.WiserApplicationPage}"/>
+         <script src="{!$Resource.HostInfoApplicationPage}"/> 
         <script src="{!$Resource.SignatureSealsSing}"/>
         <script src="{!$Resource.SignatureSealsSing}"/>
         <script src="{!$Resource.Coordinators_Page}"/>
@@ -39,7 +40,7 @@
          <script src="{!$Resource.ProjectDetail}"/>
          <script src="{!$Resource.WorkPackages}">
         	</script>  
-          <script src="{!$Resource.WiserApplicationPage}"/>   
+             
            <script src="{!$Resource.ApplicantPortalCSS}"/>
            <script src="{!$Resource.SlickThemeCss}"/>
            <script src="{!$Resource.SlickCss}"/>

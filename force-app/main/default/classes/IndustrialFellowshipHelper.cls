@@ -176,4 +176,17 @@ public String saveApplicantPortalWiser(String loginHashCode, Contact InstanceCon
         }
    }
 
+   // Host Information
+   public String saveApplicationPortalHostInformation(String loginHashCode, Contact con){
+    try{
+        update con;
+        return 'Record Updated Successfully';
+    }catch(Exception e){
+        system.debug('The Error :: '+e.getMessage()+' AND Line No :: '+e.getLineNumber()+'');
+        return 'Error Occured';
+        }
+   }
+
+   
+
 }
