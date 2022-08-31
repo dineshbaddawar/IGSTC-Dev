@@ -22,11 +22,7 @@ angular.module('cp_app').controller('ProjectDetailCtrl', function($scope,$rootSc
                 if(result != null){
                     var thematicAreaId = []
                     $rootScope.projectId = result.Id;
-                    /*  for(var i=0;i<$scope.thematicAreaList.length;i++){
-                          thematicAreaId.push($scope.thematicAreaList[i].Id);
-                          $scope.thematicAreaToDisplay.push({"Id":$scope.thematicAreaList[i].Id,"Name":$scope.thematicAreaList[i].Name,"checked":false});
-                      } */
-                     // $scope.tentitiveStartDate = result.Tentative_Start_Date__c;
+                   
                       $scope.tentitiveStartDate = new Date(result.Tentative_Start_Date__c);
                       $scope.applicantDetails = result;
                       if($scope.applicantDetails.Application_Thematic_Area__r != undefined){
@@ -140,6 +136,7 @@ angular.module('cp_app').controller('ProjectDetailCtrl', function($scope,$rootSc
        {escape: false}
        )
     }
+    //
     
     $scope.redirectPageURL = function(pageName){
         debugger;
