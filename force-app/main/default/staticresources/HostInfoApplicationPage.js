@@ -48,7 +48,7 @@ angular.module('cp_app').controller('HostInfoApplication_Ctrl', function($scope,
                     }).then((value) =>{
                          var link = document.createElement("a");
                          link.id = 'UserId';
-                         link.href = "#/ProjectDetails";
+                         link.href = "#/ProjectDetailsInWiser";
                          link.click();
                     });
                } else{
