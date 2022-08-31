@@ -1,0 +1,141 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false" controller="IndustrialFellowshipController">
+<html>
+<div ng-controller="HostInfoApplication_Ctrl">
+     <head>
+          <apex:stylesheet value="{!$Resource.ApplicantPortalCSS}" />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.16/textAngular.css" crossorigin="anonymous"
+          />
+          <script>
+              var userId = '{!$CurrentPage.parameters.id}';
+          </script>
+         
+      </head>
+
+      <body>
+          <div class="container px-4">
+              <div class="card h-100 m-5">
+
+                  <div class="card-header">   
+                      <h2 class="p-3">
+                          <b>Applicant Information</b>
+                      </h2>
+                  </div>
+
+                  <div class="card-text m-3">
+
+                      <div class="row mt-3">
+                          <div class="col-md-6">
+                              <label>First Name</label>
+                              <input type="text" class="form-control" ng-model="objContact.FirstName" />
+                          </div>
+                          <div class="col-md-6">
+                              <label>Last Name</label>
+                              <input type="text" class="form-control" ng-model="objContact.LastName" required="true" />
+                          </div>
+                         
+                      </div>
+                  
+
+                  <div class="row mt-3">
+                      <div class="col-md-6">
+                          <label>Designation</label>
+                          <input type="text" class="form-control" ng-model="objContact.Designation__c" />
+                      </div>
+                      <div class="col-md-6">
+                          <label>Department</label>
+                          <input type="text" ng-model="objContact.Department" class="form-control" required="true" />
+                      </div>
+                     
+                  </div>
+
+                  <div class="row mt-3">
+                      <div class="col-md-6">
+                          <label>Institute</label>
+                          <input ng-model="objContact.Institute_Name__c" type="text" class="form-control" />
+                      </div>
+                      <div class="col-md-6">
+                          <label>Photo</label>
+                              <input type="file" class="form-control" />
+                      </div>
+                  </div>
+
+                  <div class="row mt-3">
+                      <div class="col-md-4">
+                          <label>Nationality</label>
+                          <select type="select" class="form-control" ng-model="objContact.Nationality__c">
+                              <option ng-selected="{{item==objContact.Nationality__c}}" ng-repeat="item in nationality" value="{{item}}">{{item}}</option>
+                          </select>
+                      </div>
+                  </div>
+
+                  <br/>
+                  <div class="row mt-3">
+                      <div class="col-md-4">
+                          <h4><b>Mailing Address</b></h4>
+                      </div>
+                  </div>
+
+                  <div class="row mt-3">
+                      <div class="col-md-4">
+                          <label>Line 1</label>
+                          <input type="text" class="form-control" ng-model="MailingLine1" />
+                      </div>
+                      <div class="col-md-4">
+                          <label>Line 2</label>
+                          <input type="text" class="form-control" ng-model="MailingLine2" />
+                      </div>
+                      <div class="col-md-4">
+                          <label>District</label>
+                          <input type="text" class="form-control" ng-model="objContact.MailingCity" />
+                      </div>
+                  </div>
+
+                  <div class="row mt-3">
+                      <div class="col-md-4">
+                          <label>State</label>
+                          <input type="text" class="form-control" ng-model="objContact.MailingState" />
+                      </div>
+                      <div class="col-md-4">
+                          <label>Country</label>
+                          <select type="select" class="form-control" ng-model="objContact.MailingCountry">
+                              <option ng-selected="{{item==objContact.MailingCountry}}" ng-repeat="item in country" value="{{item}}">{{item}}</option>
+                              </select>
+                      </div>
+                      <div class="col-md-4">
+                          <label>Pin Code</label>
+                          <input type="text" class="form-control" ng-model="objContact.MailingPostalCode" />
+                      </div>
+                  </div>
+
+                  <div class="row mt-3">
+                      <div class="col-md-4">
+                          <label>Phone</label>
+                          <input type="text" class="form-control" ng-model="objContact.Phone" />
+                      </div>
+                      <div class="col-md-4">
+                          <label>Email</label>
+                          <input type="email" class="form-control" ng-model="objContact.Email" />
+                      </div>
+                      <div class="col-md-4">
+                          <label>Homepage</label>
+                          <input type="url" class="form-control" ng-model="objContact.Homepage_URL__c" />
+                      </div>
+                  </div>
+                   
+                  <div class="row mt-3">
+                      <div class="col-md-4">
+                          <button ng-click="saveApplicationPortalHostInformation()" type="button" class="blue-btn mt-5">
+                              <i class="fa-solid fa-check me-2"></i>Save and Next</button>
+                      </div>
+                  </div>
+
+
+              </div>
+              </div>
+          </div>
+          <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      </body>
+
+</div>
+</html>
+</apex:page>
