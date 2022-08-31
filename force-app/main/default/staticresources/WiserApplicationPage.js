@@ -33,7 +33,7 @@ angular.module('cp_app').controller('WiserApplicantInformation_Ctrl', function($
     var birthYear = 0;
     var birthMonth = 0;
     var birthDay = 0;
-    console.log("UserID ::",$rootScope.userId);
+    console.log("UserID In WISER ::",$rootScope.userId);
     if($scope.Birthdate !=undefined && $scope.Birthdate !=''){
         birthYear = $scope.Birthdate.getUTCFullYear();
         birthMonth = $scope.Birthdate.getUTCMonth()+1;
@@ -63,8 +63,7 @@ angular.module('cp_app').controller('WiserApplicantInformation_Ctrl', function($
             }).then((value) =>{
                 var link = document.createElement("a");
                 link.id = 'userId';
-                link.href = "#/ProjectDetailsWiser";
-              //  link.href="#/ProjectDetailsSing";
+                link.href="#/HostInfoApplicationPage";
                 link.click();
             });
         } else{

@@ -77,11 +77,16 @@ public withOut sharing class IndustrialFellowshipController {
         return instanceIFH.saveApplicantPortalWiser(loginHashCode, con, year, month, day);
     }
 
-    // Wiser
-    @RemoteAction
-    public static Contact getProposalDetWiser(String loginHashCode){
-        IndustrialFellowshipModel instanceIFM=new IndustrialFellowshipModel();
-        return instanceIFM.getProposalDetWiser(loginHashCode);
+   // Host Information
+   @RemoteAction 
+   public static Contact getContactHostInfo(String loginHashCode){
+       IndustrialFellowshipModel instanceIFM = new IndustrialFellowshipModel();
+       return instanceIFM.getContactHostInfo(loginHashCode);
+   }
+   // Host Information
+   @RemoteAction 
+    public static String saveApplicationPortalHostInformation(String loginHashCode, Contact con){
+        IndustrialFellowshipHelper instanceIFH = new IndustrialFellowshipHelper();
+        return instanceIFH.saveApplicationPortalHostInformation(loginHashCode, con);
     }
-    
 }

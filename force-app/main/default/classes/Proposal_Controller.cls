@@ -157,7 +157,7 @@ public withOut sharing class Proposal_Controller {
            List<account> accountContactList = [select Name,Website,Id,Year_Of_Establishment__c,Last_Year_s_Balance__c,SME__c, Homepage_URL__c,Country_Type__c,Head_Of_Project__c,Industry__c,
            Email__c,DSIR_Recoginition_Details__c,Company_Profile__c,Company_Website__c,Academia__c,Phone,Main_Business_Area__c,NumberOfEmployees,Infrastructural_Facilities__c,
            Domain_Expertise_Available__c,Large_Industry__c,Start_Up__c,ShippingStreet,ShippingCity,ShippingState,ShippingPostalCode,ShippingCountry,Department__c,
-           (select name,id,firstName,LastName,Email,Phone from contacts) from account where Proposals__c =:conRec.Proposals__c];
+           (select name,id,firstName,LastName,Email,Phone from contacts order By createdDate ASC) from account where Proposals__c =:conRec.Proposals__c order By createdDate ASC]; 
            system.debug('accountContactList---'+accountContactList);
            return accountContactList;
         }

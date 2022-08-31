@@ -30,15 +30,18 @@ public Contact getProposalDet(String loginHashCode){
      From Contact WHERE Login_Hash_Code__c=: loginHashCode Limit 1];
 }
 
+// Wiser
 public  Contact getContactWiser(String loginHashCode){
     Contact con = [SELECT Id,FirstName,LastName, MailingCity, MailingState,MailingCountry,MailingPostalCode, MailingStreet,Nationality__c,Institute_Name__c,Department, Designation__c,Phone,Email, Homepage_URL__c, Birthdate FROM Contact WHERE Login_Hash_Code__c =: loginHashCode LIMIT 1];
     System.debug('con Data::'+con);
     return con;
 }
 
-public Contact getProposalDetWiser(String loginHashCode){
-    return [SELECT Id,Name,Proposals__r.Id,Proposals__r.Brief_Statement_of_Purpose__c,Proposals__r.Proposed_area__c,Proposals__r.Purpose_for_applying__c,Proposals__r.KeyWords__c,Proposals__r.Project_Description__c,Proposals__r.Indo_German_Colloboration__c,Proposals__r.Abstract_of_proposed__c
-     From Contact WHERE Login_Hash_Code__c=: loginHashCode Limit 1];
+// Host Information
+public Contact getContactHostInfo(String loginHashCode){
+    Contact con = [SELECT Id,FirstName,LastName, MailingCity, MailingState,MailingCountry,MailingPostalCode, MailingStreet,Nationality__c,Institute_Name__c,Department, Designation__c,Phone,Email, Homepage_URL__c, Birthdate FROM Contact WHERE Login_Hash_Code__c =: loginHashCode LIMIT 1];
+    System.debug('con Data::'+con);
+    return con;
 }
 
 }
