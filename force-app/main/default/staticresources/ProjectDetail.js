@@ -4,8 +4,15 @@ angular.module('cp_app').controller('projectCtrl', function($scope,$rootScope) {
     $scope.proposalDetails = {};
     $scope.disable = false;
     $rootScope.secondstage;
+    // $scope.removeHTML = function(str){ 
+    //     debugger;
+    //     var tmp = document.createElement("<b>");
+    //     tmp.innerHTML = str;
+    //     return tmp.textContent || tmp.innerText || "";
+    // }
     $scope.saveDetails = function(){
         debugger;
+        //$scope.proposalDetails.Research_Approach_Objectives__c = $scope.proposalDetails.Research_Approach_Objectives__c.replace(/<\/?[^>]+(>|$)/g, "");
         ApplicantPortal_Contoller.insertProjectDetails($scope.proposalDetails, function(result,event){
             if(event.status){
                 debugger;

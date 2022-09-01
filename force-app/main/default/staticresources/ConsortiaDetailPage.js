@@ -314,7 +314,7 @@
             if($scope.consortiaDetails.length < 3 || $scope.consortiaDetails.length > 5){
                 Swal.fire(
                     '',
-                    'More than 6 and less than 4 applicants are not allowed',
+                    'Minimum 4 and Maximaum 6 applicants are allowed.',
                     'error'
                 );
                 return;

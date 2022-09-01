@@ -23,7 +23,7 @@ angular.module('cp_app').controller('HostInfoApplication_Ctrl', function($scope,
      };
 
      $scope.saveApplicationPortalHostInformation = function(){
-          alert("Method saveApplicationPortalHostInformation Called")
+         // alert("Method saveApplicationPortalHostInformation Called")
           console.log("USER ID In HOST::",$rootScope.userId);
           debugger;
           if($scope.MailingLine1 != undefined){
@@ -48,7 +48,7 @@ angular.module('cp_app').controller('HostInfoApplication_Ctrl', function($scope,
                     }).then((value) =>{
                          var link = document.createElement("a");
                          link.id = 'UserId';
-                         link.href = "#/ProjectDetailsInWiser";
+                         link.href = "#/ProjectDetailsInWiserPage";   // 
                          link.click();
                     });
                } else{

@@ -161,6 +161,7 @@ global without sharing class SharePointHandler {
         req.setHeader('Content-Type','application/json;odata=verbose');
         req.setHeader('Content-Length', '0');
         req.setHeader('X-RequestDigest','{form_digest_value}');
+        req.setTimeout(120000);
         //req.setBody(EncodingUtil.base64Decode(body).toString());
         req.setBodyAsBlob(content);
 
@@ -201,5 +202,23 @@ global without sharing class SharePointHandler {
         System.debug(res.getBody());
 
         return res.getStatusCode()==200?'Success':'Failure';
+    }
+
+    public static String downloadFile(String path){
+        path = path.replace(' ','%20');
+        String url = 'sites/'+siteName+'/_api/web/GetFileByServerRelativePath(decodedurl='+'\''+path+'\')/$value';
+       
+        System.debug('URL----))))'+url);
+        HTTP http = new HTTP();
+        HttpRequest req = new HttpRequest();
+        System.debug('URL------'+url);
+        req.setEndpoint('callout:SPSF/'+url);
+        req.setMethod('GET');
+        req.setHeader('Accept', 'application/json;odata=verbose');
+        req.setHeader('odata-version','');
+
+        HTTPResponse res = http.send(req);
+        System.debug(res.getBody());
+        return res.getBody();
     }
 }

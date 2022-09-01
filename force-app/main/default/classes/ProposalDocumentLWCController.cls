@@ -112,5 +112,14 @@ public without sharing class ProposalDocumentLWCController {
         }
     }
 
+    @AuraEnabled
+    public static string downloadFile(String path){
+        try {
+            return SharePointHandler.downloadFile(path);
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
 
 }

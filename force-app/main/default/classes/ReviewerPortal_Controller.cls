@@ -66,12 +66,15 @@ public withOut sharing class ReviewerPortal_Controller {
    
 //************************************** Questiotion& Response Wrapper Class DETAIL PAGE ***********************************************
 @RemoteAction
-    Public Static List<Reviewer_Mapping__c> getReviewersDet(String QuesTempId,String ReviewerMapId,String ProposalId){
+    Public Static List<Question_Line_Item__c> getReviewersDet(String QuesTempId,String ReviewerMapId,String ProposalId){
         // QLI : Question Line Item
         // RRLI:  Reviewer Response Line Item
         //select id,name,(select id from Reviewer_Response_LineItem__r WHERE Reviewer_Mapping__c !='a1T1y000001i0m9EAA'),Reviewer__r.Name from Reviewer_Mapping__c where Proposals__c='a081y0000029D81AAE' and id!='a1T1y000001i0m9EAA'
-        return [SELECT Id,Name,Reviewer__r.Name,Reviewer__r.Email__c,Reviewer__r.Skills__c,(select id,Name,Grade_Value__c,Rating__c,Response__c,Reviewer_Mapping__r.Stage__c from Reviewer_Response_LineItem__r 
-        WHERE Reviewer_Mapping__c !=:ReviewerMapId) FROM Reviewer_Mapping__c WHERE Proposals__c=: ProposalId and id!=:QuesTempId];
+        // return [SELECT Id,Name,Reviewer__r.Name,Reviewer__r.Email__c,Reviewer__r.Skills__c,(select id,Name,Grade_Value__c,Rating__c,Response__c,Reviewer_Mapping__r.Stage__c from Reviewer_Response_LineItem__r 
+        // WHERE Reviewer_Mapping__c !=:ReviewerMapId) FROM Reviewer_Mapping__c WHERE Proposals__c=: ProposalId and id!=:QuesTempId];
+        return [SELECT Id,Name,Question__c,Question_Template__c,Is_Comment_Applicable__c,Is_Grading_Applicable__c,Is_Rating_Applicable__c,Question_Template__r.Total_Questions__c,Question_Template__r.Name,
+        (SELECT Id,Name,Grade_Value__c,Rating__c,Response__c,Reviewer_Mapping__r.Stage__c FROM Reviewer_Response_LineItem__r WHERE Reviewer_Mapping__c !=: ReviewerMapId) 
+        FROM Question_Line_Item__c  WHERE Question_Template__c =:QuesTempId ORDER BY Name];
         
         // List<QuestionLIWrapper> WrapRes = new List<QuestionLIWrapper>();
         

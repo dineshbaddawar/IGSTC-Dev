@@ -2,7 +2,7 @@
     <html>
         <div ng-controller="workPackageCtrl">
         <head>
-            <c:Libraries ></c:Libraries>
+            <!-- <c:Libraries ></c:Libraries> -->
             <script>
             var userId = '{!$CurrentPage.parameters.id}';
             </script>
@@ -10,6 +10,29 @@
         </head>
         
         <body>
+            <div class="container px-4 mt-5">
+                <div class="row mx-4">
+                    <div class="col-md-12">
+                            <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-white border rounded-5 shadow-sm" id="pillNav2" role="tablist">
+                                <li class="nav-item" role="presentation">                
+                                <a href="#" ng-click="redirectPageURL('ProjectDetailPage')" class="nav-link rounded-5" id="basic_tab" data-bs-toggle="tab" type="button" role="tab" aria-selected="true"><i class="fa fa-home i-padding"></i>Project Details</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                <a href="#" ng-click="redirectPageURL('ConsortiaDetailPage')" class="nav-link rounded-5" id="consortia_tab" data-bs-toggle="tab" type="button" role="tab" aria-selected="false"><i class="fa-solid fa-people-group i-padding"></i>Consortia Details</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                <a href="#" ng-click="redirectPageURL('Financial_Overview')" class="nav-link rounded-5" id="finance_tab" data-bs-toggle="tab" type="button" role="tab" aria-selected="false"><i class="fa-solid fa-money-bill-trend-up i-padding"></i>Finance Contribution</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                <a href="#" ng-click="redirectPageURL('ProjectDetail')" class="nav-link rounded-5" id="project_tab" data-bs-toggle="tab" type="button" role="tab" aria-selected="false"><i class="fa-solid fa-arrows-to-dot i-padding"></i>Project Details</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                <a href="#" ng-click="redirectPageURL('WorkPackages')" class="nav-link active rounded-5" id="packge_tab" data-bs-toggle="tab" type="button" role="tab" aria-selected="false"><i class="fa-solid fa-box i-padding"></i>Work Package</a>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
             <div class="container px-4">
                 <div class="card h-100 m-5">
                     <div class="card-header">

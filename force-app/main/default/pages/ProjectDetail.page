@@ -47,6 +47,7 @@
                                 <h4 class="mb-3"><b>Main objectives of the research approach - as bullet points</b></h4>
                             <div text-angular="text-angular" name="htmlcontent" ng-model="proposalDetails.Research_Approach_Objectives__c" ta-disabled='true'
                                 ng-readonly="true"></div>
+                                <!-- <apex:inputTextarea value="{!proposalDetails.Research_Approach_Objectives__c}" richText="True"/> -->
                         </div>
                         <div class="col-md-12 mb-5">
                             <h4 class="mb-3"><b>Current state of the art in the field</b></h4>

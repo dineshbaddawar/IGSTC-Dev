@@ -86,7 +86,10 @@ public withOut sharing class ApplicantPortal_Contoller {
     @RemoteAction
     public static List<Thematic_Area__c> fetchAllThematicArea(){
         return Proposal_Controller.fetchAllThematicArea(); 
-    }
+
+    } 
+
+    
 
     //********************************** CONSORTIA DETAILS ***************************************************
 
@@ -350,4 +353,17 @@ public withOut sharing class ApplicantPortal_Contoller {
     public static List<Contact> getBankDetails(string hashCode){
         return Proposal_Controller.getBankDetails(hashCode);
     }
+
+
+     //************************************** Project Details in Wiser **********************************************************
+    @RemoteAction
+    public static Application_Proposal__c getApplicantDetailsWiser(String applicantHashCode){
+        return Proposal_Controller.getApplicantDetailsWiser(applicantHashCode);
+    }
+
+    @RemoteAction
+    public static String insertApplicationWiser(Application_Proposal__c applicantDetails,  String conId){
+        return Proposal_Controller.insertApplicationWiser(applicantDetails, conId);
+    }
+
 }

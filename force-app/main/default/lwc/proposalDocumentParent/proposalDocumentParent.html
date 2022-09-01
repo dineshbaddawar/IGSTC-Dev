@@ -79,7 +79,6 @@
                                                 </template>
                                             </div>
                                         </template>
-                                    
                                     </template>
                                     <template if:true={folder.subFiles}>
                                         <template for:each={folder.subFiles} for:item="subFile">
@@ -124,7 +123,7 @@
             </div>
           </div>
       
-          <iframe src="https://utillabs.sharepoint.com/sites/IGSTC/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/IGSTC/Shared Documents/Proposals/IGSTC-00211/1st Year/Optiva_Recipie.json')" height="500" width="500" title="Iframe Example"></iframe>
+          <!-- <iframe src={url} height="500" width="500" title="Iframe Example"></iframe> -->
 
           <template if:true={showFolderCreation}>
             <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">

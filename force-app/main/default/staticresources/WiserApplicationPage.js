@@ -28,7 +28,7 @@ angular.module('cp_app').controller('WiserApplicantInformation_Ctrl', function($
   };
 
   $scope.saveApplicantPortalWiser = function(){
-    alert("Method saveApplicantPortalWiser Called")
+  //  alert("Method saveApplicantPortalWiser Called")
     debugger;
     var birthYear = 0;
     var birthMonth = 0;

@@ -22,7 +22,7 @@ public withOut sharing class Proposal_Controller {
         system.debug('applicantHashCode' +applicantHashCode);
         Application_Proposal__c proposalRecord;
         if(!string.isBlank(conRec.Proposals__c)){
-            proposalRecord = [SELECT id,Name,Acronym__c,Title_Of__c,Title_In_German__c,Thematic_Topic__c,Duration_In_Months_Max_36__c,Tentative_Start_Date__c,Summary__c,KeyWords__c,Stage__c,Proposed_Venue__c,Proposed_Date__c,(select name,id,Thematic_Area_Name__c	 from Application_Thematic_Area__r) FROM Application_Proposal__c WHERE Id=: conRec.Proposals__c];
+            proposalRecord = [SELECT id,Name,Acronym__c,Title_Of__c,Title_In_German__c,Thematic_Topic__c,Duration_In_Months_Max_36__c,Tentative_Start_Date__c,Summary__c,KeyWords__c,Abstract_of_proposed__c,Project_Description__c,Stage__c,Proposed_Venue__c,Proposed_Date__c,(select name,id,Thematic_Area_Name__c	 from Application_Thematic_Area__r) FROM Application_Proposal__c WHERE Id=: conRec.Proposals__c];
             system.debug('proposalRecord----'+proposalRecord);
             return proposalRecord;
         }else{
@@ -155,7 +155,7 @@ public withOut sharing class Proposal_Controller {
         system.debug('conRec.Proposals__c---'+conRec.Proposals__c);
         if(!string.isBlank(conRec.Proposals__c)){
            List<account> accountContactList = [select Name,Website,Id,Year_Of_Establishment__c,Last_Year_s_Balance__c,SME__c, Homepage_URL__c,Country_Type__c,Head_Of_Project__c,Industry__c,
-           Email__c,DSIR_Recoginition_Details__c,Company_Profile__c,Company_Website__c,Academia__c,Phone,Main_Business_Area__c,NumberOfEmployees,Infrastructural_Facilities__c,
+           Email__c,Is_DSIR_Available__c,DSIR_Recoginition_Details__c,Company_Profile__c,Company_Website__c,Academia__c,Phone,Main_Business_Area__c,NumberOfEmployees,Infrastructural_Facilities__c,
            Domain_Expertise_Available__c,Large_Industry__c,Start_Up__c,ShippingStreet,ShippingCity,ShippingState,ShippingPostalCode,ShippingCountry,Department__c,
            (select name,id,firstName,LastName,Email,Phone from contacts order By createdDate ASC) from account where Proposals__c =:conRec.Proposals__c order By createdDate ASC]; 
            system.debug('accountContactList---'+accountContactList);
@@ -296,6 +296,16 @@ public withOut sharing class Proposal_Controller {
     
     public static string insertProjectDetails(Application_Proposal__c proposalDetails){
         try{
+            system.debug('Research_Approach_Objectives__c ::'+proposalDetails.Research_Approach_Objectives__c);
+            
+            proposalDetails.Research_Approach_Objectives__c = proposalDetails.Research_Approach_Objectives__c.replaceAll('<[^>]*>', '');
+            proposalDetails.Current_State_Of_The_Art__c = proposalDetails.Current_State_Of_The_Art__c.replaceAll('<[^>]*>', '');
+            proposalDetails.Expected_Deliverables__c = proposalDetails.Expected_Deliverables__c.replaceAll('<[^>]*>', '');
+            proposalDetails.Reasons_For_And_Benefits_Of_Cooperation__c = proposalDetails.Reasons_For_And_Benefits_Of_Cooperation__c.replaceAll('<[^>]*>', '');
+            proposalDetails.Equipment__c = proposalDetails.Equipment__c.replaceAll('<[^>]*>', '');
+            proposalDetails.Criteria_For_Abandoning_The_Project__c = proposalDetails.Criteria_For_Abandoning_The_Project__c.replaceAll('<[^>]*>', '');
+            proposalDetails.Innovative_Aspects__c = proposalDetails.Innovative_Aspects__c.replaceAll('<[^>]*>', '');
+            proposalDetails.Research_Scholars__c = proposalDetails.Research_Scholars__c.replaceAll('<[^>]*>', '');
             upsert proposalDetails;
             return 'Success';
         }catch(Exception e){
@@ -390,7 +400,7 @@ public withOut sharing class Proposal_Controller {
                 List<Application_Proposal__c> applicationList = new List<Application_Proposal__c>();
                 List<Work_Package__c> packageList = [Select Id,Application__c From Work_Package__c Where Id IN :workPackageList];
                 for(Work_Package__c work : packageList){
-                    applicationList.add(new Application_Proposal__c(Id = work.Application__c,Proposal_Stages__c = 'Submitted'));
+                    applicationList.add(new Application_Proposal__c(Id = work.Application__c,Stage__c = '1st Stage',Proposal_Stages__c = 'Submitted'));
                 }
                 upsert workPackDetails;
                 upsert applicationList;
@@ -404,13 +414,34 @@ public withOut sharing class Proposal_Controller {
     }
 
     public static  String insertWPContactDetailsAsDraft(List<Work_Package__c> workPackDetails){
+
+        //system.debug('applicationList ::'+applicationList);
+                system.debug('workPackDetails ::'+workPackDetails);
         try{
-            upsert workPackDetails;
+            List<String> workPackageList = new List<String>();
+            List<Application_Proposal__c> applicationList = new List<Application_Proposal__c>();
+            for(Work_Package__c wp : workPackDetails){
+                workPackageList.add(wp.Id);
+            }
+            if(!workPackageList.isEmpty()){
+                List<Work_Package__c> workList = [SELECT Id,Application__c From Work_Package__c Where Id IN :workPackageList];
+                for(Work_Package__c wp : workList){
+                    Application_Proposal__c proposal = New Application_Proposal__c();
+                    proposal.Id = wp.Application__c;
+                    proposal.Stage__c = '1st Stage';
+                    proposal.Proposal_Stages__c = 'Draft';
+                    applicationList.add(proposal);
+                }
+                
+                upsert applicationList;
+                upsert workPackDetails;
+            }
+            
             return 'SUCCESS';
             
         }catch(Exception e){
             System.debug('The Error is  :'+e.getMessage());
-            return 'ERROR'; 
+            return e.getMessage()/*'ERROR'*/; 
         }
     }
 
@@ -704,4 +735,37 @@ public withOut sharing class Proposal_Controller {
         }
         return conList;
     }
+
+    ///************************************** Project Details In Wiser **********************************************************
+
+    public static Application_Proposal__c getApplicantDetailsWiser(string applicantHashCode){
+       
+        contact conRec = [select name,id,Proposals__c from contact where Login_Hash_Code__c =:applicantHashCode limit 1];
+        system.debug('applicantHashCode' +applicantHashCode);
+        Application_Proposal__c proposalRecord;
+        if(!string.isBlank(conRec.Proposals__c)){
+            proposalRecord = [SELECT id,Name,Acronym__c,Title_Of__c,Title_In_German__c,Thematic_Topic__c,Duration_In_Months_Max_36__c,Tentative_Start_Date__c,Summary__c,KeyWords__c,Abstract_of_proposed__c,Project_Description__c,Stage__c,Proposed_Venue__c,Proposed_Date__c,(select name,id,Thematic_Area_Name__c	 from Application_Thematic_Area__r) FROM Application_Proposal__c WHERE Id=: conRec.Proposals__c];
+            system.debug('proposalRecord----'+proposalRecord);
+            return proposalRecord;
+        }else{
+            return proposalRecord;  
+        }     
+    }
+
+    public static String insertApplicationWiser(Application_Proposal__c applicantDetails, String conId){
+       upsert applicantDetails;
+       Contact con = new Contact(Id = conId, Proposals__c =applicantDetails.Id);
+       update con;
+       Contact conRec = [SELECT Id,AccountId FROM Contact WHERE Id =:con.id];
+       if(!String.isBlank(conRec.AccountId)){
+        Account acc = new Account();
+        acc.id = conRec.AccountId;
+        acc.Proposals__c = applicantDetails.Id;
+        update acc;
+       }
+       return applicantDetails.Id;
+    }
+
+
+
 }

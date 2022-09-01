@@ -5,6 +5,7 @@ import createFolderSP from '@salesforce/apex/ProposalDocumentLWCController.creat
 import deleteFolderInsideSite from '@salesforce/apex/ProposalDocumentLWCController.deleteFolderInsideSite';
 import deleteFileSP from '@salesforce/apex/ProposalDocumentLWCController.deleteFileSP';
 import createFile from '@salesforce/apex/ProposalDocumentLWCController.createFile';
+import downloadFile from '@salesforce/apex/ProposalDocumentLWCController.downloadFile';
 import { refreshApex } from '@salesforce/apex';
 
 
@@ -20,6 +21,7 @@ export default class ProposalDocumentParent extends LightningElement {
     @track showFolderCreation = false;
     @track showFileCreation = false;
     @track disableFolderDeletion = true;
+   
 
     @wire(getFoldersAndFiles,{recId:'$recordId'})
     wiredResponse(result){
@@ -70,6 +72,8 @@ export default class ProposalDocumentParent extends LightningElement {
 
         this.folders = foldersList;
         this.folders[clickedIndex].expanded = !this.folders[clickedIndex].expanded;
+
+        console.log('ProposalCliecked',this.folders[clickedIndex]);
 
         let selectedFolder = this.folders[clickedIndex];
 
@@ -333,7 +337,20 @@ export default class ProposalDocumentParent extends LightningElement {
         this.disableFileClicked = false;
         this.folders[parentIndex].subFiles = filesList;
         this.selectedFile = this.folders[parentIndex].subFiles[subFileIndex];
-        
+        let path = this.selectedFile.LinkingUri;
+        if(path && path.length>0){
+            window.open(path,'_blank');
+        }else{
+            console.log('SubFiles',this.selectedFile);
+            let filename = '/'+this.selectedFile.Name;
+            let path = 'https://utillabs.sharepoint.com/sites/IGSTC/Shared%20Documents/Forms/AllItems.aspx?id='+this.selectedFile.ServerRelativeUrl+'&parent='+this.selectedFile.ServerRelativeUrl.replace(filename,'');
+            window.open(path,'_blank');
+        }
+        downloadFile({path}).then(result=>{
+            console.log('Result-----',result);
+        }).catch(error=>{
+            console.log('Error----',error);
+        })
         console.log('SubFiles----',this.folders[parentIndex].subFiles[subFileIndex]);
         //let path = this.folders[parentIndex].subFiles
     }

@@ -35,7 +35,29 @@
 
         <body>
 
-
+            <div class="container px-4 mt-5">
+                <div class="row mx-4">
+                    <div class="col-md-12">
+                            <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-white border rounded-5 shadow-sm" id="pillNav2" role="tablist">
+                                <li class="nav-item" role="presentation">                
+                                <a href="#" ng-click="redirectPageURL('ProjectDetailPage')" class="nav-link rounded-5" id="basic_tab" data-bs-toggle="tab" type="button" role="tab" aria-selected="true"><i class="fa fa-home i-padding"></i>Project Details</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                <a href="#" ng-click="redirectPageURL('ConsortiaDetailPage')" class="nav-link active rounded-5" id="consortia_tab" data-bs-toggle="tab" type="button" role="tab" aria-selected="false"><i class="fa-solid fa-people-group i-padding"></i>Consortia Details</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                <a href="#" ng-click="redirectPageURL('Financial_Overview')" class="nav-link rounded-5" id="finance_tab" data-bs-toggle="tab" type="button" role="tab" aria-selected="false"><i class="fa-solid fa-money-bill-trend-up i-padding"></i>Finance Contribution</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                <a href="#" ng-click="redirectPageURL('ProjectDetail')" class="nav-link rounded-5" id="project_tab" data-bs-toggle="tab" type="button" role="tab" aria-selected="false"><i class="fa-solid fa-arrows-to-dot i-padding"></i>Project Details</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                <a href="#" ng-click="redirectPageURL('WorkPackages')" class="nav-link rounded-5" id="packge_tab" data-bs-toggle="tab" type="button" role="tab" aria-selected="false"><i class="fa-solid fa-box i-padding"></i>Work Package</a>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
 
             <!-- The Modal -->
             <div class="modal" id="companyProfile">
@@ -63,63 +85,132 @@
                                 </div>
                             </div>
                                 <div class="row mt-4">
-                                <div class="col-md-11">
+                                <div class="col-md-6">
                                     <label class="control-label">
                                         <b>Name</b>
                                     </label>
                                     <input type="text" class="form-control" ng-model="applicantDetails.Name" maxlength="255" ng-disabled="disable" />
                                 </div>
+                                <div class="col-md-6">
+                                    <label class="control-label">
+                                        <b>Department/Division</b>
+                                    </label>
+                                    <input type="text" class="form-control" ng-model="applicantDetails.Department__c" maxlength="255" ng-disabled="disable" />
+                                </div>
                             </div>
                             <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <label class="control-label">
+                                        <b>Street</b>
+                                    </label>
+                                    <input type="text" class="form-control" ng-model="applicantDetails.ShippingStreet" maxlength="255" ng-disabled="disable" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="control-label">
+                                        <b>City</b>
+                                    </label>
+                                    <input type="text" class="form-control" ng-model="applicantDetails.ShippingCity" maxlength="255" ng-disabled="disable" />
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <label class="control-label">
+                                        <b>State</b>
+                                    </label>
+                                    <input type="text" class="form-control" ng-model="applicantDetails.ShippingState" maxlength="255" ng-disabled="disable" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="control-label">
+                                        <b>Post Code</b>
+                                    </label>
+                                    <input type="text" class="form-control" ng-model="applicantDetails.ShippingPostalCode" maxlength="255" ng-disabled="disable" />
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <label class="control-label">
+                                        <b>Country</b>
+                                    </label>
+                                    <input type="text" class="form-control" ng-model="applicantDetails.ShippingCountry" maxlength="255" ng-disabled="disable" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="control-label">
+                                        <b>Head Of Project</b>
+                                    </label>
+                                    <input type="text" class="form-control" ng-model="applicantDetails.Head_Of_Project__c" maxlength="255" ng-disabled="disable" />
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <label class="control-label">
+                                        <b>Email</b>
+                                    </label>
+                                    <input type="text" class="form-control" ng-model="applicantDetails.Email__c" maxlength="255" ng-disabled="disable" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="control-label">
+                                        <b>Phone</b>
+                                    </label>
+                                    <input type="text" class="form-control" ng-model="applicantDetails.Phone" maxlength="255" ng-disabled="disable" />
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <label class="control-label">
+                                        <b>Homepage URL</b>
+                                    </label>
+                                    <input class="form-control" type="url" ng-model="applicantDetails.Homepage_URL__c" ng-disabled="disable" />
+                                </div>
                                 <div class="col-md-6">
                                     <label class="control-label">
                                         <b>Year Of Establishment</b>
                                     </label>
                                     <input type="text" class="form-control" ng-model="applicantDetails.Year_Of_Establishment__c" maxlength="255" ng-disabled="disable" />
                                 </div>
+                            </div>
+                            <div class="row mt-4">
                                 <div class="col-md-6">
                                     <label class="control-label">
                                         <b>Main Business Area</b>
                                     </label>
-                                    <input type="text" class="form-control" ng-model="applicantDetails.Main_Business_Area__c" style="width:75%" maxlength="255" ng-disabled="disable" />
+                                    <input type="text" class="form-control" ng-model="applicantDetails.Main_Business_Area__c" maxlength="255" ng-disabled="disable" />
                                 </div>
-                            </div>
-                            <div class="row mt-4">
                                 <div class="col-md-6">
                                     <label class="control-label">
                                         <b>Number Of Permanent Employees</b>
                                     </label>
-                                    <input type="Number" class="form-control" ng-model="applicantDetails.NumberOfEmployees" style="width:75%" ng-disabled="disable" />
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="control-label">
-                                        <b>Infrastructural Facilities</b>
-                                    </label>
-                                    <input type="text" class="form-control" ng-model="applicantDetails.Infrastructural_Facilities__c" style="width:75%" maxlength="255" ng-disabled="disable" />
+                                    <input type="Number" class="form-control" ng-model="applicantDetails.NumberOfEmployees" ng-disabled="disable" />
                                 </div>
                             </div>
                             <div class="row mt-4">
                                 <div class="col-md-6">
                                     <label class="control-label">
+                                        <b>Infrastructural Facilities</b>
+                                    </label>
+                                    <input type="text" class="form-control" ng-model="applicantDetails.Infrastructural_Facilities__c" maxlength="255" ng-disabled="disable" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="control-label">
                                         <b>Domain Expertise Available/Existing</b>
                                     </label>
-                                    <input type="text" class="form-control" ng-model="applicantDetails.Domain_Expertise_Available__c" style="width:75%" maxlength="255" ng-disabled="disable" />
+                                    <input type="text" class="form-control" ng-model="applicantDetails.Domain_Expertise_Available__c" maxlength="255" ng-disabled="disable" />
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <label class="control-label">
+                                        <b>Ownership Profile</b>
+                                    </label>
+                                    <textarea class="form-control" ng-model="applicantDetails.Ownership_Profile__c" maxlength="131072" ng-disabled="disable" />
                                 </div>
                                 <div class="col-md-6">
                                     <label class="control-label">
                                         <b>Last Year's Balance</b>
                                     </label>
-                                    <input type="Number" class="form-control" ng-model="applicantDetails.Last_Year_s_Balance__c" style="width:75%" maxlength="255" ng-disabled="disable" />
+                                    <input type="Number" class="form-control" ng-model="applicantDetails.Last_Year_s_Balance__c" maxlength="255" ng-disabled="disable" />
                                 </div>
                             </div>
                             <div class="row mt-4">
-                                <!-- <div class="col-md-6">
-                                    <label class="control-label">
-                                        <b>DSIR Recoginition Details</b>
-                                    </label>
-                                    <span class="text-danger">*</span>
-                                    <input type="text" class="form-control" ng-model="applicantDetails.DSIR_Recoginition_Details__c" style="width:75%" maxlength="255" ng-disabled="disable" required="true" ng-required="applicantDetails.DSIR_Recoginition_Details__c" />
-                                </div> -->
                                 <div class="col-md-6">
                                     <button type="button" class="blue-btn mt-5" ng-click="saveDetails()"><i class="fa-solid fa-check me-2"></i>Submit and Next</button>
                                 </div>
@@ -481,7 +572,7 @@
 
 
             <!-- The Modal -->
-                <div class="container m-5 px-4">
+                <div class="container ms-5 px-4">
                     <div class="card h-100 m-5">
                         <div Class="card-header">
                             <h2 class="p-3">

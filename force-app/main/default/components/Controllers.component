@@ -24,7 +24,8 @@
         <script src="{!$Resource.ApplicantInformationSing}"/>
         <script src="{!$Resource.ProjectDetailsSing}"/>
         <script src="{!$Resource.WiserApplicationPage}"/>
-         <script src="{!$Resource.HostInfoApplicationPage}"/> 
+         <script src="{!$Resource.HostInfoApplicationPage}"/>
+         <script src="{!$Resource.ProjectDetailInWiserPage}"/> 
         <script src="{!$Resource.SignatureSealsSing}"/>
         <script src="{!$Resource.SignatureSealsSing}"/>
         <script src="{!$Resource.Coordinators_Page}"/>
